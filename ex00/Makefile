@@ -1,34 +1,30 @@
-NAME		:= bureaucrat						# Name of final executable							# Source directory (current directory of the exercise)					# Where object files are built
-CXX			:= c++								# C++ compiler
-CXXFLAGS	:= -std=c++98 -Wall -Werror -Wextra	# Compilation flags
-INCLUDE	:= -I.									# Looks in the current directory for #include files
+NAME		=	bureaucrat
+DIR_SRC		=	./
+DIR_BUILD	=	./build
+CXX			=	c++
+CXXFLAGS	=	-std=c++98 -Wall -Werror -Wextra -pedantic 
+LDINCLUDE	=	-I$(DIR_SRC)
 
-SRCS		:=	main.cpp Bureaucrat.cpp
-BUILD_DIR	:=	build							# Directory where all the compiled object files will go, keeps project organsised
-OBJS		:=	$(SRCS:%.cpp=$(BUILD_DIR)/%.o)	# Transorms the list of cpp files into .o files in the build directory
+SRCS		=	Bureaucrat.cpp  main.cpp
+SRCS_NAME	=	$(basename $(SRCS))
+OBJS		=	$(addsuffix .o, $(addprefix $(DIR_BUILD)/, $(SRCS_NAME)))
 
-#all is what is run when you run make
 all: $(NAME)
 
-#the executable depends on the object files/
-# If any .o files are missing or outdated (timestamp), make will build it first
 $(NAME): $(OBJS)
-	$(CXX) $(CXXFLAGS) $(OBJS) -o $@
+	@$(CXX) $(OBJS) $(CXXFLAGS) -o $@
 
-#rule that tells it how to create .o files
-# first need to create the build directory
-# to build .o, look for.cpp file
-$(BUILD_DIR)/%.o: %.cpp
-	@mkdir -p $(dir $@)
-# <$ first prerequisite (the .cpp file)
-	@$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
+$(DIR_BUILD)/%.o: $(DIR_SRC)/%.cpp
+	@mkdir -p $(dir $@) 
+	@$(CXX) $(CXXFLAGS) $(LDINCLUDE) -c $< -o $@
 
 clean:
-	@rm -rf $(BUILD_DIR)
+	@rm -rf $(OBJS)
+	@rm -rf $(DIR_BUILD)
 
-flean: clean
-	@rm -f $(NAME)
+fclean: clean
+	@rm -rf $(NAME)
 
 re: fclean all
 
-.PHONY: re clean fclean all
+.PHONY: all clean fclean re

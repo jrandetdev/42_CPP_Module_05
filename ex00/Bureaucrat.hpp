@@ -2,16 +2,6 @@
 #include <string>
 #include <exception>
 
-class GradeTooHighException : public exception
-{
-	const char* what() const throw();
-};
-
-class GradeTooLow : public exception
-{
-	const char* what() const throw();
-};
-
 /**
  * @brief Bureaucrat class contains
  * 
@@ -32,8 +22,8 @@ class GradeTooLow : public exception
 class	Bureaucrat
 {
 	private:
-		std::string const	name;
-		int 				grade;
+		std::string const	_name;
+		int 				_grade;
 	public:
 		Bureaucrat();
 		Bureaucrat(const std::string name, int grade);
@@ -41,12 +31,22 @@ class	Bureaucrat
 		Bureaucrat& operator=(const Bureaucrat& other);
 		~Bureaucrat();
 
-		class GradeTooHighException();
+		class GradeTooHighException: public std::exception
+		{
+			const char* what() const throw();
+		};
+
+		class GradeTooLowException : public std::exception
+		{
+			const char* what() const throw();
+		};
 
 		// Pass by const reference
 		const std::string& 	getName(void) const;
 		int			getGrade(void) const;
 
 		void				incrementBureaucratGrade();
-		void				decrementBureaucratGrade();
+		void				decrementBureaucratGrade();	
 };
+
+std::ostream& operator<<(std::ostream &outstream, const Bureaucrat &x);
