@@ -50,3 +50,4 @@ class	Bureaucrat
 };
 
 std::ostream& operator<<(std::ostream &outstream, const Bureaucrat &x);
+

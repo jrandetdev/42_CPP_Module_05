@@ -47,7 +47,7 @@ Bureaucrat::Bureaucrat(const std::string name, int grade) : _name(name), _grade(
  * @param other (const reference to an existing object of the same class)
  * 
  */
-Bureaucrat::Bureaucrat(const Bureaucrat& other) : _grade(other._grade), _name(other._name)
+Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other._name), _grade(other._grade)
 {
 
 }
