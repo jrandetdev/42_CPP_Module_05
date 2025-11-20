@@ -13,7 +13,9 @@ Bureaucrat::Bureaucrat() : _name("Bob"), _grade(10)
 /**
  * @brief Construct a new Bureaucrat:: object with two parameters.
  * 
- * @attention when data members are declared as constant, they have to be intialised before
+ * @attention when data members are declared as constant, they cannot be left
+ * uninitialised and must be initialised before the construct part of the code
+ * is executed. 
  * 
  * @param name 
  * @param grade 
@@ -95,6 +97,11 @@ int Bureaucrat::getGrade(void) const
 	return (this->_grade);
 }
 
+/**
+ * @brief An exception 
+ * 
+ * @return const char* 
+ */
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
 	return ("Grade too high!");
@@ -121,7 +128,8 @@ void	Bureaucrat::decrementBureaucratGrade()
 
 /**
  * @brief Overload of the insertion operator. In C++11, we would declare it as a friend
- * because it would be called without creating an object. 
+ * because it would be called without creating an object. iN C++98 Since they take the
+ * user-defined type as the right argument (b in a @ b), they must be implemented as non-members. 
  * 
  * @param outstream 
  * @param x (Bureaucrat object sent as a reference.)
@@ -129,6 +137,7 @@ void	Bureaucrat::decrementBureaucratGrade()
  */
 std::ostream& operator<<(std::ostream& outstream, const Bureaucrat& x)
 {
+	// write the desired input to the outstream
 	outstream << x.getName() << ", bureaucrat grade" << x.getGrade();
 	return (outstream);
 }
