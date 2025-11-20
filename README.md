@@ -25,14 +25,14 @@ In our main.cpp, we put code for which we are interested in handling exceptions 
 
 For example:
 ```cpp
-try { // exceptions here are handled by the handler defined below
-    v[v.size()] = 7; // try to access beyond the end of v
+try
+{
+    /* do some studff with bureaucrats */
 }
-
-catch (out_of_range) { // oops: out_of_range error
-// ... handle range error ...
+catch (std::exception & e)
+{
+    /* handle exception */
 }
-// ...
 ```
 ---
 ## ex00
@@ -41,3 +41,36 @@ Goal of the exercise: create a Bureaucrat. A Bureaucrat has
 - a constant name (careful, needs to be initialised in the initializer list)
 - a grade that ranges from 1 (highest possible grade) to 150 (lowest possible grade) - yes they are kind of inverted.
 **Introduction to exceptions and try-catch:** in our program, Bureaucrats with an invalid grade must throw an exception: either a Bureaucrat::GradeTooHighException or a Bureaucrat::GradeTooLowException.
+
+```cpp
+class	Bureaucrat
+{
+	private:
+		std::string const	_name;
+		int 				_grade;
+	public:
+		Bureaucrat();
+		Bureaucrat(const std::string name, int grade);
+		Bureaucrat(const Bureaucrat &other);
+		Bureaucrat& operator=(const Bureaucrat& other);
+		~Bureaucrat();
+
+		class GradeTooHighException: public std::exception
+		{
+			const char* what() const throw();
+		};
+
+		class GradeTooLowException : public std::exception
+		{
+			const char* what() const throw();
+		};
+
+		const std::string& 	getName(void) const;
+		int			getGrade(void) const;
+
+		void				incrementBureaucratGrade();
+		void				decrementBureaucratGrade();	
+};
+```
+
+It also contains two member functions to increment and decrement the fgrade. If the grade goes out of range, the program handles the exceptions just like in the construtor.
