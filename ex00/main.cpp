@@ -3,18 +3,18 @@
 #include <stdio.h>
 #include "Bureaucrat.hpp"
 
-static void	constructorWithOutOfRangeGrades()
+static void	constructorOfRangeGradesTest()
 {
+	std::cout << YELLOW << "Test: constructing with out of range grade (should not construct)" << RESET << std::endl;
 	try
 	{
 		Bureaucrat test("Bob", 160);
+		std::cout << GREEN << test << RESET << std::endl;
 	}
 	catch(const std::exception& e)
 	{
-		if (strcmp(e.what(), "Grade too low!") == 0) { std::cout << "\nTest 1 OK!" << std::endl; }
-		
-		std::cout << "Throwing GradeTooLowException ..." << std::endl;
 		std::cerr << e.what() << '\n';
+		std::cout << "Exiting with exception" << '\n';
 	}
 
 	try
@@ -22,31 +22,67 @@ static void	constructorWithOutOfRangeGrades()
 		Bureaucrat test2("Alice", 0);
 	}
 	catch(const std::exception& e)
-	{
-		if (strcmp(e.what(), "Grade too high!") == 0) { std::cout << "\nTest 2 OK!" << std::endl; }
-		
-		std::cout << "Throwing GradeTooHighException ..." << std::endl;
+	{	
 		std::cerr << e.what() << '\n';
+		std::cout << "Exiting with exception" << '\n';
 	}
 }
 
-static void incrementAndDecrement()
+static void incrementOutofRangeTest()
 {
+	std::cout << YELLOW << "\nTest: incrementing a grade and making it out of range" << RESET << std::endl;
 	try
 	{
-		Bureaucrat test("Bob", 50);
+		Bureaucrat test("Bob", 1);
+		std::cout << GREEN << test << RESET << std::endl;
+		test.incrementBureaucratGrade();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+		std::cout << "Exiting with exception" << '\n';
+	}
+}
 
+static void decrementOutofRangeTest()
+{
+	std::cout << YELLOW << "\nTest: decrementing a grade and making it out of range" << RESET << std::endl;
+	try
+	{
+		Bureaucrat test("Bob", 1);
+		std::cout << GREEN << test << RESET << std::endl;					// Generates the function call operator<<(cout, test)
+		test.incrementBureaucratGrade();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+		std::cout << "Exiting with exception" << '\n';
+	}
+}
+
+static	void	correctValuesTest()
+{
+	std::cout << YELLOW << "\nTest: testing with correct values" << RESET << std::endl;
+	try
+	{
+		Bureaucrat test("Charlie", 50);
+		std::cout << GREEN << test << RESET << std::endl;
+		test.incrementBureaucratGrade();
+		std::cout << GREEN << test << RESET << std::endl;
+		test.decrementBureaucratGrade();
+		std::cout << GREEN << test << RESET << std::endl;
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
 	}
-	
 }
 
 int main()
 {
-	constructorWithOutOfRangeGrades();
-	incrementAndDecrement();
+	constructorOfRangeGradesTest();
+	incrementOutofRangeTest();
+	decrementOutofRangeTest();
+	correctValuesTest();
 	return (0);
 }

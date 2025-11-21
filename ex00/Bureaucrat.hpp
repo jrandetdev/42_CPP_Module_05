@@ -1,6 +1,15 @@
+#ifndef BUREAUCRAT_H
+# define BUREAUCRAT_H
+
 #include <iostream>
 #include <string>
 #include <exception>
+
+#define RED     "\033[31m"      /* Red */
+#define YELLOW  "\033[33m"      /* Yellow */
+#define GREEN   "\033[32m"      /* Green */
+#define BLUE    "\033[34m"      /* Blue */
+#define RESET   "\033[0m"		/* Reset */
 
 /**
  * @brief Bureaucrat class contains
@@ -51,3 +60,4 @@ class	Bureaucrat
 
 std::ostream& operator<<(std::ostream &outstream, const Bureaucrat &x);
 
+#endif

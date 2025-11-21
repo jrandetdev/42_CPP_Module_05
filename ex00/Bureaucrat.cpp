@@ -1,4 +1,7 @@
 #include "Bureaucrat.hpp"
+#include <iomanip>
+#include <string>
+#include <exception>
 
 /// CONSTRUCTORS ///
 
@@ -7,7 +10,7 @@
  */
 Bureaucrat::Bureaucrat() : _name("Bob"), _grade(10)
 {
-	std::cout << "Bureaucrat:: default constructor called with basic values" << '\n';
+	
 }
 
 /**
@@ -26,11 +29,12 @@ Bureaucrat::Bureaucrat(const std::string name, int grade) : _name(name), _grade(
 		throw GradeTooHighException();
 	else if (grade > 150)
 		throw GradeTooLowException();
-	std::cout << "Bureaucrat:: own constructor which takes as parameters the name and grade" << '\n';
+
+//	std::cout << "Bureaucrat " << this->getName() << " constructed succesfully" << std::endl;
 }
 
 
-/// COPY CONSTRUCTOR ///
+/// COPY CONSTRUCTOR ///n
 
 /**
  * @brief Copy Construct a new Bureaucrat:: Bureaucrat object. It creates a new object and does 
@@ -77,7 +81,7 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other)
  */
 Bureaucrat::~Bureaucrat()
 {
-
+	std::cout << RED << "Bureaucrat " << this->getName() << " destroyed" << RESET << '\n';
 }
 
 /// GETTERS ///
@@ -104,16 +108,17 @@ int Bureaucrat::getGrade(void) const
  */
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
-	return ("Grade too high!");
+	return ("Exeption: Grade too high!");
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
-	return ("Grade too low!");
+	return ("Exception: Grade too low!");
 }
 
 void	Bureaucrat::incrementBureaucratGrade()
 {
+	std::cout << "Incrementing the Bureaucrat grade" << '\n';
 	this->_grade--;
 	if (this->_grade < 1)
 		throw GradeTooHighException();
@@ -122,6 +127,7 @@ void	Bureaucrat::incrementBureaucratGrade()
 void	Bureaucrat::decrementBureaucratGrade()
 {
 	this->_grade++;
+	std::cout << "Decrementing the Bureaucrat grade" << '\n';
 	if (this->_grade >= 150)
 		throw GradeTooLowException();
 }
@@ -138,6 +144,6 @@ void	Bureaucrat::decrementBureaucratGrade()
 std::ostream& operator<<(std::ostream& outstream, const Bureaucrat& x)
 {
 	// write the desired input to the outstream
-	outstream << x.getName() << ", bureaucrat grade" << x.getGrade();
+	outstream << x.getName() << ", bureaucrat grade " << x.getGrade() << ".";// << std::endl;
 	return (outstream);
 }
