@@ -88,7 +88,8 @@ public:
 
 Exceptions that are created inherit from the std::exception class.
 
-The insert operator is overloaded but it is defined as a non-member function because it must take the std::ostream on the left (a) of it and a reference to a Bureaucrat object on its right (b). 
+The insert operator is overloaded but it is defined as a non-member function because it must take the std::ostream on the left (a) of it and a reference to a Bureaucrat object on its right (b).
+
 a.operator<<(b). We cannot have it inside our class and use this->.
 
 ---
