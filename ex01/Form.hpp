@@ -19,29 +19,37 @@ class	Form
 	public:
 		// Constructors and destructors
 		Form();
-		Form(const Form& other);
-		Form& operator=(const Form& other);
-		~Form();
+		// Form(const Form& other);
+		// Form& operator=(const Form& other);
+		// ~Form();
 
-		// Exception classes
-		class GradeTooHighException : public std::exception {
-			public:
-				virtual const char* what() const throw();
-		};
+		// // Exception classes
+		// class GradeTooHighException : public std::exception {
+		// 	public:
+		// 		virtual const char* what() const throw();
+		// };
 
-		class GradeTooLowException : public std::exception {
-			public:
-				virtual const char* what() const throw();
-		};
+		// class GradeTooLowException : public std::exception {
+		// 	public:
+		// 		virtual const char* what() const throw();
+		// };
 		
 		// Getters
-		const std::string&	getName();
+		const std::string&	getName() const;
+		bool				getSignatureStatus() const;
+		int					getFormSigningGrade() const;
+		int					getFormExcecutingGrade() const;
+
+		// // Member function
+		// void				beSigned(const Bureaucrat& bureaucrat);
 	private:
 		const std::string	_name;
-		bool				_is_signed;
-		const int			_form_signing_grade;
-		const int 			_form_executing_grade;
+		bool				_isSigned;
+		const int			_formSigningGrade;
+		const int 			_formExecutingGrade;
 };
+
+class Bureaucrat;
 
 // Stream insertion operator
 std::ostream& operator<<(std::ostream& os, const Form& form);

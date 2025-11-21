@@ -55,4 +55,4 @@ class Bureaucrat
 // Stream insertion operator
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat);
 
-#endif // BUREAUCRAT_HPP
+#endif

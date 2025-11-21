@@ -5,7 +5,7 @@ CXX			=	c++
 CXXFLAGS	=	-std=c++98 -Wall -Werror -Wextra -pedantic 
 LDINCLUDE	=	-I$(DIR_SRC)
 
-SRCS		=	Bureaucrat.cpp  main.cpp
+SRCS		=	Bureaucrat.cpp Form.cpp main.cpp
 SRCS_NAME	=	$(basename $(SRCS))
 OBJS		=	$(addsuffix .o, $(addprefix $(DIR_BUILD)/, $(SRCS_NAME)))
 
