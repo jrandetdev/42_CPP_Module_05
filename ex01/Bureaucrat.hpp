@@ -12,6 +12,8 @@
 #define BLUE    "\033[34m"
 #define RESET   "\033[0m"
 
+class Form;
+
 /**
  * @brief Bureaucrat with a name and grade (1-150).
  * 
@@ -47,6 +49,8 @@ class Bureaucrat
 		void incrementBureaucratGrade();
 		void decrementBureaucratGrade();
 
+		// Member function
+		void	signForm(Form& form);
 	private:
 		const std::string   _name;
 		int                 _grade;

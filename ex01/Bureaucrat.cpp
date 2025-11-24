@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include <iomanip>
 #include <string>
 #include <exception>
@@ -76,6 +77,25 @@ void	Bureaucrat::decrementBureaucratGrade() {
 const char* Bureaucrat::GradeTooHighException::what() const throw() { return ("Exeption: Grade too high!"); }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw() { return ("Exception: Grade too low!"); }
+
+// =============================================================================
+// Signing form member function
+// =============================================================================
+
+//changes bool _isSigned if the grade of the Bureaucrat is high enough for the form
+void	Bureaucrat::signForm(Form& form)
+{
+	try
+	{
+		form.beSigned(*this);
+		std::cout << this->_name << " signed " << form.getFormName() << std::endl;		
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+		std::cout << this->_name << " couldn't sign " << form.getFormName() << " because " << e.what() << std::endl;
+	}	
+}
 
 // =============================================================================
 // Stream Operators

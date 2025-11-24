@@ -49,7 +49,7 @@ Goal of the exercise: create a Bureaucrat which exists only if a couple of condi
 A Bureaucrat has:
 - The Canonical constructor/destructor, copy constructor, copy assignment operator
 - A constant name (careful, needs to be initialised in the initializer list)
-- A grade that ranges from 1 (highest possible grade) to 150 (lowest possible grade) - yes they are kind of inverted.
+- A grade that ranges from 1 (highest possible grade) to 150 (lowest possible grade) - yes they are kind of inverted. Grade here is not academic grade but rather the grade inside a company.,
 - The two exceptions as inline classes
 - Increment and decrement member functions: incrementing a grade 3 results in a grade 2.
 
@@ -104,6 +104,8 @@ A form has the following **private** (not protected) attributes (with correspond
 - A constant grade required to sign it. (if grade is not high enough, _isSigned will not change)
 - A constant grade required to execute it (if grade is not high enough, _isSigned will not change)
 
+The grades obey the same rules as the Bureaucrat (1 - 150 and exceptions).
+
 ```cpp
 class	Form
 {
@@ -136,7 +138,7 @@ class	Form
 		int					getFormExcecutingGrade() const;
 
 		// // Member function
-		// void				beSigned(const Bureaucrat& bureaucrat);
+		void				beSigned(const Bureaucrat& bureaucrat);
 	private:
 		const std::string	_name;
 		bool				_isSigned;
@@ -144,7 +146,6 @@ class	Form
 		const int 			_formExecutingGrade;
 };
 ```
-The grades obey the same rules as the Bureaucrat (1 - 150 and exceptions).
 
 The following member functions are specific to the Form class:
-- beSigned() member function: it changes the form's _isSigned status if the grade is high enough (greater or equal to the required one). If too low, throw a GradeTooLowException.
+- beSigned() member function: it changes the form's _isSigned status if the grade is high enough (greater or equal to the required one in the Form class). If too low, throw a GradeTooLowException.

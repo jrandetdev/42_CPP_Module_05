@@ -4,6 +4,23 @@
 #include <string>
 #include <exception>
 
+static void	signingBureaucratLowGrade()
+{
+	std::cout << "\nTest 4 signingBureaucratLowGrade" << '\n';
+	try
+    {
+        Bureaucrat Bob("Bob", 100);
+        Form contract("Contract", false, 50, 50);
+        
+        // Bob (grade 100) tries to sign a form requiring grade 50
+        Bob.signForm(contract);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << "✗ Exception caught: " << e.what() << '\n';
+    }
+}
+
 static void inBoundsConstruction()
 {
 	std::cout << "\nTest 3 inBoundsConstruction" << '\n';
@@ -49,17 +66,12 @@ static void	TooHighConstruction()
 	}
 }
 
-void	gettersTest()
-{
-	Form test;
-	std::cout << test << std::endl;
-}
 
 int main()
 {
-	gettersTest();
 	TooHighConstruction();
 	TooLowConstruction();
 	inBoundsConstruction();
+	signingBureaucratLowGrade();
 	return (0);
 }

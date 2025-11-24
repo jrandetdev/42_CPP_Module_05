@@ -14,10 +14,12 @@ Form::Form()
 	_formExecutingGrade(10) {
 }
 
+//Constructor with arguments 
 Form::Form (const std::string name, bool isSigned, \
 	const int formSigningGrade, const int formExcecutingGrade)
 	: _name(name), _isSigned(isSigned), _formSigningGrade(formSigningGrade),
 	_formExecutingGrade(formExcecutingGrade) {
+	
 	if (_formSigningGrade < 1)
 		throw GradeTooHighException();
 	if (_formSigningGrade > 150)
@@ -44,7 +46,7 @@ Form& Form::operator=(const Form& other) {
 
 // Destructor
 Form::~Form() {
-	std::cout << RED << "Form " << this->getName()
+	std::cout << RED << "Form " << this->getFormName()
 			<< " destroyed" << RESET << '\n';
 }
 
@@ -52,11 +54,11 @@ Form::~Form() {
 // Accessors (Getters)
 // =============================================================================
 
-const std::string&	Form::getName() const {
+const std::string&	Form::getFormName() const {
 	return (this->_name);
 }
 
-bool	Form::getSignatureStatus() const {
+bool	Form::getFormSignatureStatus() const {
 	return (this->_isSigned);
 }
 
@@ -67,24 +69,6 @@ int			Form::getFormSigningGrade() const {
 int			Form::getFormExcecutingGrade() const {
 	return (this->_formExecutingGrade);
 }
-
-// // =============================================================================
-// // Grade Management
-// // =============================================================================
-
-// void	Bureaucrat::incrementBureaucratGrade() {
-// 	std::cout << "Incrementing the Bureaucrat grade" << '\n';
-// 	this->_grade--;
-// 	if (this->_grade < 1)
-// 		throw GradeTooHighException();
-// }
-
-// void	Bureaucrat::decrementBureaucratGrade() {
-// 	this->_grade++;
-// 	std::cout << "Decrementing the Bureaucrat grade" << '\n';
-// 	if (this->_grade >= 150)
-// 		throw GradeTooLowException();
-// }
 
 // =============================================================================
 // Exception Implementations
@@ -98,10 +82,14 @@ const char* Form::GradeTooLowException::what() const throw() { return ("Exceptio
 // Member functions
 // =============================================================================
 
-// void				beSigned(const Bureaucrat& bureaucrat)
-// {
-
-// }
+void	Form::beSigned(const Bureaucrat& bureaucrat)
+{
+	std::cout << _formSigningGrade << std::endl;
+	std::cout << bureaucrat.getGrade() << std::endl;
+	if (bureaucrat.getGrade() >= _formSigningGrade)
+		throw Form::GradeTooLowException();
+	_isSigned = true;
+}
 
 // =============================================================================
 // Stream Operators
@@ -109,8 +97,8 @@ const char* Form::GradeTooLowException::what() const throw() { return ("Exceptio
 
 std::ostream& operator<<(std::ostream& outstream, const Form& form)
 {
-	outstream << "Form name: " << form.getName() << '\n'
-			<< "Form signature status: " << form.getSignatureStatus() << '\n'
+	outstream << "Form name: " << form.getFormName() << '\n'
+			<< "Form signature status: " << form.getFormSignatureStatus() << '\n'
 			<< "Form grade required for executing: " << form.getFormExcecutingGrade() << '\n'
 			<< "Form grade required for signing: " << form.getFormSigningGrade();
 	return (outstream);

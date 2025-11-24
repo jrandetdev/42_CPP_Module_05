@@ -39,13 +39,13 @@ class	Form
 		};
 		
 		// Getters
-		const std::string&	getName() const;
-		bool				getSignatureStatus() const;
+		const std::string&	getFormName() const;                                                                                                                                                                                                                          
+		bool				getFormSignatureStatus() const;
 		int					getFormSigningGrade() const;
 		int					getFormExcecutingGrade() const;
 
 		// // Member function
-		// void				beSigned(const Bureaucrat& bureaucrat);
+		void			beSigned(const Bureaucrat& bureaucrat);
 	private:
 		const std::string	_name;
 		bool				_isSigned;
