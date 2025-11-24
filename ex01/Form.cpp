@@ -4,20 +4,6 @@
 #include <string>
 #include <exception>
 
-
-
-void	checkOutOfRangeFormGrades(Form& form)
-{
-		if (form.getFormSigningGrade() < 1)
-			throw Form::GradeTooHighException();
-		else if (form.getFormSigningGrade() > 150)
-			throw Form::GradeTooLowException();
-		if (form.getFormExcecutingGrade() < 1)
-			throw Form::GradeTooHighException();
-		else if (form.getFormExcecutingGrade() > 150)
-			throw Form::GradeTooLowException();
-}
-
 // =============================================================================
 // Orthodox Canonical Form
 // =============================================================================
@@ -26,15 +12,21 @@ void	checkOutOfRangeFormGrades(Form& form)
 Form::Form()
 	: _name("Contract"), _isSigned(false), _formSigningGrade(10),
 	_formExecutingGrade(10) {
-	checkOutOfRangeFormGrades(*this);
 }
 
 Form::Form (const std::string name, bool isSigned, \
 	const int formSigningGrade, const int formExcecutingGrade)
 	: _name(name), _isSigned(false), _formSigningGrade(formSigningGrade),
-	_formExecutingGrade(formExcecutingGrade)
-{
+	_formExecutingGrade(formExcecutingGrade) {
+	if (_formSigningGrade < 1)
+		throw GradeTooHighException();
+	if (_formSigningGrade > 150)
+		throw GradeTooLowException();
 
+	if (_formExecutingGrade < 1)
+		throw GradeTooHighException();
+	if (_formExecutingGrade > 150)
+		throw GradeTooLowException();
 }
 
 // //	Copy Constructor
