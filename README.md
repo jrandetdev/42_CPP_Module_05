@@ -1,6 +1,6 @@
 # CPP05 - Exception Handling in C++
 
-## 📚 Module Overview
+## Module Overview
 This module focuses on understanding inheritance, getter/setter functions, and **exception handling with try-catch mechanisms**.
 
 ### Exercises
@@ -11,7 +11,7 @@ This module focuses on understanding inheritance, getter/setter functions, and *
 
 ---
 
-## 🎯 Key Concept: Exceptions
+## Key Concept: Exceptions
 
 ### What are Exceptions?
 Exceptions provide a mechanism to transfer information from the point where an error is detected to a point where it can be handled (using `try` and `catch` blocks). While the standard library defines a hierarchy of exception classes (e.g., `bad_alloc`), this module requires defining custom exceptions.
@@ -49,7 +49,7 @@ catch (std::exception & e)
 
 ---
 
-## 🏢 ex00: Bureaucrat Class with Exceptions
+## ex00: Bureaucrat Class with Exceptions
 
 ### Objective
 Create a `Bureaucrat` class that only exists when specific conditions are met.
@@ -107,7 +107,7 @@ public:
 };
 ```
 
-### 💡 Key Learning
+### Key Learning
 - **Custom exceptions:** Inherit from `std::exception` class
 - **Overloaded insertion operator (`<<`):** Defined as a non-member function because:
   - Must take `std::ostream` on the left
@@ -116,7 +116,7 @@ public:
 
 ---
 
-## 📝 ex01: Form Class
+## ex01: Form Class
 
 ### Objective
 Create a `Form` class that requires appropriate bureaucrat grades for signing and execution.
@@ -179,15 +179,15 @@ private:
 - Changes `_isSigned` status to `true` if the bureaucrat's grade is high enough (≥ required grade)
 - Throws `GradeTooLowException` if bureaucrat's grade is insufficient
 
-### 💡 Key Learning
+### Key Learning
 **Exceptions can be thrown anywhere in code** - not just in constructors!
 
 ---
 
-## 🎨 ex02: Abstract Classes + Exceptions
+## ex02: Abstract Classes + Exceptions
 *(To be completed)*
 
 ---
 
-## 📖 Study Notes
-*Use this space to add your own insights and key takeaways as you work through the exercises*
+## Study Notes
+
