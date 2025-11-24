@@ -4,6 +4,20 @@
 #include <string>
 #include <exception>
 
+
+
+void	checkOutOfRangeFormGrades(Form& form)
+{
+		if (form.getFormSigningGrade() < 1)
+			throw Form::GradeTooHighException();
+		else if (form.getFormSigningGrade() > 150)
+			throw Form::GradeTooLowException();
+		if (form.getFormExcecutingGrade() < 1)
+			throw Form::GradeTooHighException();
+		else if (form.getFormExcecutingGrade() > 150)
+			throw Form::GradeTooLowException();
+}
+
 // =============================================================================
 // Orthodox Canonical Form
 // =============================================================================
@@ -12,10 +26,15 @@
 Form::Form()
 	: _name("Contract"), _isSigned(false), _formSigningGrade(10),
 	_formExecutingGrade(10) {
-		// (void)_name;
-		// (void)_isSigned;
-		// (void)_formExecutingGrade;
-		// (void)_formSigningGrade;
+	checkOutOfRangeFormGrades(*this);
+}
+
+Form::Form (const std::string name, bool isSigned, \
+	const int formSigningGrade, const int formExcecutingGrade)
+	: _name(name), _isSigned(false), _formSigningGrade(formSigningGrade),
+	_formExecutingGrade(formExcecutingGrade)
+{
+
 }
 
 // //	Copy Constructor
@@ -73,8 +92,6 @@ int			Form::getFormExcecutingGrade() const {
 // 	std::cout << "Decrementing the Bureaucrat grade" << '\n';
 // 	if (this->_grade >= 150)
 // 		throw GradeTooLowException();
-
-
 // }
 
 // // =============================================================================
@@ -84,6 +101,15 @@ int			Form::getFormExcecutingGrade() const {
 // const char* Bureaucrat::GradeTooHighException::what() const throw() { return ("Exeption: Grade too high!"); }
 
 // const char* Bureaucrat::GradeTooLowException::what() const throw() { return ("Exception: Grade too low!"); }
+
+// =============================================================================
+// Member functions
+// =============================================================================
+
+void				beSigned(const Bureaucrat& bureaucrat)
+{
+
+}
 
 // =============================================================================
 // Stream Operators

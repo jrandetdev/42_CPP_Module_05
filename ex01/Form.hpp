@@ -19,20 +19,22 @@ class	Form
 	public:
 		// Constructors and destructors
 		Form();
+		Form (const std::string name, bool _isSigned, \
+			const int _formSigningGrade, const int _formExcecutingGrade);
 		// Form(const Form& other);
 		// Form& operator=(const Form& other);
 		// ~Form();
 
-		// // Exception classes
-		// class GradeTooHighException : public std::exception {
-		// 	public:
-		// 		virtual const char* what() const throw();
-		// };
+		// Exception classes
+		class GradeTooHighException : public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
 
-		// class GradeTooLowException : public std::exception {
-		// 	public:
-		// 		virtual const char* what() const throw();
-		// };
+		class GradeTooLowException : public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
 		
 		// Getters
 		const std::string&	getName() const;
