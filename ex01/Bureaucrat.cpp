@@ -88,12 +88,12 @@ void	Bureaucrat::signForm(Form& form)
 	try
 	{
 		form.beSigned(*this);
-		std::cout << this->_name << " signed " << form.getFormName() << std::endl;		
+		std::cout << GREEN << '\n' << this->_name << " signed " << form.getFormName() << RESET << std::endl;		
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
-		std::cout << this->_name << " couldn't sign " << form.getFormName() << " because " << e.what() << std::endl;
+		std::cout << RED << '\n' << this->_name << " couldn't sign " << form.getFormName() << " because " << e.what() << RESET << std::endl;
 	}	
 }
 
@@ -103,7 +103,7 @@ void	Bureaucrat::signForm(Form& form)
 
 std::ostream& operator<<(std::ostream& outstream, const Bureaucrat& bureaucrat)
 {
-	outstream << bureaucrat.getName() << ", bureaucrat grade "
+	outstream << '\n' << bureaucrat.getName() << ", bureaucrat grade "
 			<< bureaucrat.getGrade() << ".";
 	return (outstream);
 }

@@ -4,9 +4,30 @@
 #include <string>
 #include <exception>
 
+
+static void inBoundBureaucratSigning()
+{
+	std::cout << YELLOW << "\nTest 4 signingBureaucratLowGrade" << RESET << '\n';
+	try
+    {
+        Bureaucrat Bob("Bob", 50);
+		std::cout << Bob << std::endl;
+
+        Form contract("Contract", false, 100, 100);
+        std::cout << contract << std::endl;
+
+        // Bob (grade 100) tries to sign a form requiring grade 50
+        Bob.signForm(contract);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << "✗ Exception caught: " << e.what() << '\n';
+    }
+}
+
 static void	signingBureaucratLowGrade()
 {
-	std::cout << "\nTest 4 signingBureaucratLowGrade" << '\n';
+	std::cout << YELLOW << "\nTest 4 signingBureaucratLowGrade" << RESET << '\n';
 	try
     {
         Bureaucrat Bob("Bob", 100);
@@ -23,7 +44,7 @@ static void	signingBureaucratLowGrade()
 
 static void inBoundsConstruction()
 {
-	std::cout << "\nTest 3 inBoundsConstruction" << '\n';
+	std::cout << YELLOW << "\nTest 3 inBoundsConstruction" << RESET << '\n';
 	try
 	{
 		Form test("Contract", false, 1, 100);
@@ -38,7 +59,7 @@ static void inBoundsConstruction()
 
 static void	TooLowConstruction()
 {
-	std::cout << "\nTest 2 OutOfRangeConstruction" << '\n';
+	std::cout << YELLOW << "\nTest 2 OutOfRangeConstruction" << RESET << '\n';
 	try
 	{
 		Form test("Contract", false, 1, 151);
@@ -53,7 +74,7 @@ static void	TooLowConstruction()
 
 static void	TooHighConstruction()
 {
-	std::cout << "\nTest 2 OutOfRangeConstruction" << '\n';
+	std::cout << YELLOW << "\nTest 2 OutOfRangeConstruction" << RESET << '\n';
 	try
 	{
 		Form test("Contract", false, 0, 100);
@@ -73,5 +94,6 @@ int main()
 	TooLowConstruction();
 	inBoundsConstruction();
 	signingBureaucratLowGrade();
+	inBoundBureaucratSigning();
 	return (0);
 }
