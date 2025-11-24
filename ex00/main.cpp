@@ -5,7 +5,7 @@
 
 static void	constructorOfRangeGradesTest()
 {
-	std::cout << YELLOW << "Test: constructing with out of range grade (should not construct)" << RESET << std::endl;
+	std::cout << YELLOW << "Test 1: constructing with out of range grade (should not construct)" << RESET << std::endl;
 	try
 	{
 		Bureaucrat test("Bob", 160);
@@ -30,7 +30,7 @@ static void	constructorOfRangeGradesTest()
 
 static void incrementOutofRangeTest()
 {
-	std::cout << YELLOW << "\nTest: incrementing a grade and making it out of range" << RESET << std::endl;
+	std::cout << YELLOW << "\nTest 2: incrementing a grade and making it out of range" << RESET << std::endl;
 	try
 	{
 		Bureaucrat test("Bob", 1);
@@ -46,7 +46,7 @@ static void incrementOutofRangeTest()
 
 static void decrementOutofRangeTest()
 {
-	std::cout << YELLOW << "\nTest: decrementing a grade and making it out of range" << RESET << std::endl;
+	std::cout << YELLOW << "\nTest 3: decrementing a grade and making it out of range" << RESET << std::endl;
 	try
 	{
 		Bureaucrat test("Bob", 1);
@@ -62,7 +62,7 @@ static void decrementOutofRangeTest()
 
 static	void	correctValuesTest()
 {
-	std::cout << YELLOW << "\nTest: testing with correct values" << RESET << std::endl;
+	std::cout << YELLOW << "\nTest 4: testing with correct values" << RESET << std::endl;
 	try
 	{
 		Bureaucrat test("Charlie", 50);

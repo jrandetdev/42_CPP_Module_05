@@ -11,8 +11,7 @@
 //	Default constructor
 Form::Form()
 	: _name("Contract"), _isSigned(false), _minimumGradeSigning(10),
-	_minimumGradeExecuting(10) {
-}
+	_minimumGradeExecuting(10) {}
 
 //Constructor with arguments 
 Form::Form (const std::string name, bool isSigned, \
@@ -36,11 +35,11 @@ Form::Form(const Form& other)
 	: _name(other._name), _isSigned(other._isSigned), _minimumGradeSigning(other._minimumGradeSigning),
 	_minimumGradeExecuting(other._minimumGradeExecuting) {}
 
-// Copy Assignment Constructor
+// Copy Assignment Constructor (only _isSigned can be changed)
 Form& Form::operator=(const Form& other) {
 	if (this != &other)
 		_isSigned = other._isSigned;
-	return (*this);
+	return (*this); 
 }
 
 // Destructor
@@ -61,11 +60,11 @@ bool	Form::getFormSignatureStatus() const {
 	return (this->_isSigned);
 }
 
-int			Form::getMinSigningGrade() const {
+int	Form::getMinSigningGrade() const {
 	return (this->_minimumGradeSigning);
 }
 
-int			Form::getMinExcecutingGrade() const {
+int	Form::getMinExcecutingGrade() const {
 	return (this->_minimumGradeExecuting);
 }
 
@@ -81,6 +80,7 @@ const char* Form::GradeTooLowException::what() const throw() { return ("Exceptio
 // Member functions
 // =============================================================================
 
+// Check against the minimum required and throws an exception if not
 void	Form::beSigned(const Bureaucrat& bureaucrat)
 {
 	if (bureaucrat.getGrade() > _minimumGradeSigning)
@@ -94,7 +94,7 @@ void	Form::beSigned(const Bureaucrat& bureaucrat)
 
 std::ostream& operator<<(std::ostream& outstream, const Form& form)
 {
-	outstream << "\nForm name: " << form.getFormName() << '\n'
+	outstream << "Form name: " << form.getFormName() << '\n'
 			<< "Form signature status: " << form.getFormSignatureStatus() << '\n'
 			<< "Form grade required for executing: " << form.getMinExcecutingGrade() << '\n'
 			<< "Form grade required for signing: " << form.getMinSigningGrade();

@@ -149,3 +149,5 @@ class	Form
 
 The following member functions are specific to the Form class:
 - beSigned() member function: it changes the form's _isSigned status if the grade is high enough (greater or equal to the required one in the Form class). If too low, throw a GradeTooLowException.
+
+Learning: exceptions can be thrown anywhere in code. 

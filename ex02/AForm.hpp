@@ -1,0 +1,52 @@
+#ifndef AFORM_HPP
+# define AFORM_HPP
+
+#include <string>
+#include <iomanip>
+#include <exception>
+
+class	AForm
+{
+	public:
+		// Constructors and destructors
+		AForm();
+		AForm (const std::string name, bool _isSigned, \
+			const int _minimumGradeSigning, const int _AFormExcecutingGrade);
+		AForm(const AForm& other);
+		AForm& operator=(const AForm& other);
+		~AForm();
+
+		// Exception classes
+		class GradeTooHighException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
+
+		class GradeTooLowException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
+		
+		// Getters
+		const std::string&	getFormName() const;                                                                                                                                                                                                                          
+		bool				getFormSignatureStatus() const;
+		int					getMinSigningGrade() const;
+		int					getMinExcecutingGrade() const;
+
+		// // Member function
+		void			beSigned(const Bureaucrat& bureaucrat);
+	private:
+		const std::string	_name;
+		bool				_isSigned;
+		const int			_minimumGradeSigning;
+		const int 			_minimumGradeExecuting;
+};
+
+class Bureaucrat;
+
+// Stream insertion operator
+std::ostream& operator<<(std::ostream& os, const Form& form);
+
+#endif

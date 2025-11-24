@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include <iomanip>
 #include <string>
 #include <exception>
@@ -65,7 +66,7 @@ void	Bureaucrat::incrementBureaucratGrade() {
 void	Bureaucrat::decrementBureaucratGrade() {
 	this->_grade++;
 	std::cout << "Decrementing the Bureaucrat grade" << '\n';
-	if (this->_grade >= 150)
+	if (this->_grade > 150)
 		throw GradeTooLowException();
 }
 
@@ -78,12 +79,31 @@ const char* Bureaucrat::GradeTooHighException::what() const throw() { return ("E
 const char* Bureaucrat::GradeTooLowException::what() const throw() { return ("Exception: Grade too low!"); }
 
 // =============================================================================
+// Signing form member function
+// =============================================================================
+
+//changes bool _isSigned if the grade of the Bureaucrat is high enough for the form
+void	Bureaucrat::signForm(Form& form)
+{
+	try
+	{
+		form.beSigned(*this);
+		std::cout << GREEN << '\n' << this->_name << " signed " << form.getFormName() << RESET << std::endl;		
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+		std::cout << RED << '\n' << this->_name << " couldn't sign " << form.getFormName() << " because " << e.what() << RESET << std::endl;
+	}	
+}
+
+// =============================================================================
 // Stream Operators
 // =============================================================================
 
 std::ostream& operator<<(std::ostream& outstream, const Bureaucrat& bureaucrat)
 {
-	outstream << bureaucrat.getName() << ", bureaucrat grade "
+	outstream << '\n' << bureaucrat.getName() << ", bureaucrat grade "
 			<< bureaucrat.getGrade() << ".";
 	return (outstream);
 }
