@@ -1,35 +1,41 @@
-# CPP05
-## About this Module
-The scope of this Module is to further understand inheritance, getter and setter functions and **more importantly the try-catch mechanisms with exceptions.**
+# CPP05 - Exception Handling in C++
 
-**List of exercises:**
+## 📚 Module Overview
+This module focuses on understanding inheritance, getter/setter functions, and **exception handling with try-catch mechanisms**.
+
+### Exercises
 - **ex00:** Introduction to exceptions with try-catch
-- **ex01:** Implement specific behaviours for exceptions according to the error caught
-- **ex02:** Combine the knowledge gained in CPP04 with abstract classes and exceptions.
-- **ex03:** to be written
+- **ex01:** Implementing specific behaviors for exceptions based on error types
+- **ex02:** Combining abstract classes (from CPP04) with exception handling
+- **ex03:** *(To be completed)*
 
 ---
 
-## New Concept: Exceptions
-**Exceptions:** An exception is provided to help get information from the point where an error is detected to a point where it can be handled (try, catch). The standard library defines a small hierarchy of exception classes (bad_alloc etc.) but here we have to define our own exceptions.
+## 🎯 Key Concept: Exceptions
 
-**Advantage of exception handling:** 
-- Instead of terminating the program when an error is handled, the errors are simply caught but the program can still run.
-- An exception will terminate a program ONLY if the programmer decides it should.
-- Preferable to the unconditional termination of programs. The noexcept() specifier makes that explicit.
-- Exceptions mean "some part of the system couldn't do what I asked it to do"
+### What are Exceptions?
+Exceptions provide a mechanism to transfer information from the point where an error is detected to a point where it can be handled (using `try` and `catch` blocks). While the standard library defines a hierarchy of exception classes (e.g., `bad_alloc`), this module requires defining custom exceptions.
 
-**Throw concept:** throwing an exception transfers the control to a handler.
+### Advantages of Exception Handling
+- **Program continuity:** Errors are caught and handled without terminating the program
+- **Controlled termination:** Programs only terminate if explicitly instructed by the programmer
+- **Graceful degradation:** Preferable to unconditional program termination (made explicit with `noexcept()` specifier)
+- **Clear error signaling:** Exceptions communicate "some part of the system couldn't complete the requested operation"
 
-**Stack unwinding:**
-1. It initialises an object with dynamic storage duration called the exception object.
-2. Once the exception object is constructed, the control flow works backwards up the call stack until it reaches the start of a try block, at which point the parameters of all associated handlers are compared with the type of the exception object.
-3. If it matches, it jumps to the coresponding handler.
-4. As the control flow moves up the call stack, destructors are invoked for all objects with automati storage duration, but not yet destroyed since the corresponding try block was entered in reverse order of completion of their constructor.
+### How Exceptions Work
 
-see https://en.cppreference.com/w/cpp/language/throw.html 
+**Throwing an exception:** Transfers control flow to an appropriate handler.
 
-For example:
+**Stack Unwinding Process:**
+1. Creates an exception object with dynamic storage duration
+2. Control flow moves backwards up the call stack until reaching the start of a `try` block
+3. Parameters of all associated handlers are compared with the exception object's type
+4. When a match is found, execution jumps to the corresponding handler
+5. During unwinding, destructors are invoked for all automatic storage duration objects (in reverse order of construction)
+
+**Reference:** [cppreference.com - throw](https://en.cppreference.com/w/cpp/language/throw)
+
+**Example syntax:**
 ```cpp
 try
 {
@@ -43,18 +49,29 @@ catch (std::exception & e)
 
 ---
 
-## ex00
-Goal of the exercise: create a Bureaucrat which exists only if a couple of conditions are met...
+## 🏢 ex00: Bureaucrat Class with Exceptions
 
-A Bureaucrat has:
-- The Canonical constructor/destructor, copy constructor, copy assignment operator
-- A constant name (careful, needs to be initialised in the initializer list)
-- A grade that ranges from 1 (highest possible grade) to 150 (lowest possible grade) - yes they are kind of inverted. Grade here is not academic grade but rather the grade inside a company.,
-- The two exceptions as inline classes
-- Increment and decrement member functions: incrementing a grade 3 results in a grade 2.
+### Objective
+Create a `Bureaucrat` class that only exists when specific conditions are met.
 
-**Introduction to exceptions and try-catch:** in our program, Bureaucrats with an invalid grade must either throw the Bureaucrat::GradeTooHighException or Bureaucrat::GradeTooLowException.
+### Class Requirements
 
+**Attributes:**
+- Constant name (initialized in initializer list)
+- Grade ranging from **1** (highest) to **150** (lowest)
+  - *Note: Lower numbers = higher rank (like company hierarchy)*
+
+**Mandatory Functions:**
+- Canonical form: constructor, destructor, copy constructor, copy assignment operator
+- Grade manipulation: `incrementBureaucratGrade()` and `decrementBureaucratGrade()`
+  - *Example: Incrementing grade 3 → grade 2*
+
+**Exception Handling:**
+Invalid grades must throw:
+- `Bureaucrat::GradeTooHighException` (grade < 1)
+- `Bureaucrat::GradeTooLowException` (grade > 150)
+
+### Implementation
 ```cpp
 class Bureaucrat
 {
@@ -69,6 +86,7 @@ public:
     Bureaucrat& operator=(const Bureaucrat& other);
     ~Bureaucrat();
 
+    // Nested exception classes (inherit from std::exception)
     class GradeTooHighException: public std::exception
     {
         const char* what() const throw();
@@ -79,79 +97,97 @@ public:
         const char* what() const throw();
     };
 
+    // Getters
     const std::string&  getName(void) const;
     int                 getGrade(void) const;
+    
+    // Grade manipulation
     void                incrementBureaucratGrade();
     void                decrementBureaucratGrade(); 
 };
 ```
 
-Exceptions that are created inherit from the std::exception class.
-
-The insert operator is overloaded but it is defined as a non-member function because it must take the std::ostream on the left (a) of it and a reference to a Bureaucrat object on its right (b). (Book CPP)
-
-a.operator<<(b). We cannot have it inside our class and use this->.
+### 💡 Key Learning
+- **Custom exceptions:** Inherit from `std::exception` class
+- **Overloaded insertion operator (`<<`):** Defined as a non-member function because:
+  - Must take `std::ostream` on the left
+  - Takes `Bureaucrat` reference on the right
+  - Cannot be a member function (would require `this->` on the left side)
 
 ---
 
-## ex01
+## 📝 ex01: Form Class
 
-Goal of the excercise: Creation of the Form class.
+### Objective
+Create a `Form` class that requires appropriate bureaucrat grades for signing and execution.
 
-A form has the following **private** (not protected) attributes (with corresponding getters for the public interface of the class)
-- A constant name
-- A boolean indifcating whether it is signed (not signed at construction, so bool _isSigned = false)
-- A constant grade required to sign it. (if grade is not high enough, _isSigned will not change)
-- A constant grade required to execute it (if grade is not high enough, _isSigned will not change)
+### Class Requirements
 
-The grades obey the same rules as the Bureaucrat (1 - 150 and exceptions).
+**Private Attributes** *(with corresponding getters):*
+- Constant name
+- Boolean `_isSigned` (defaults to `false` at construction)
+- Constant grade required to sign (signing only possible if bureaucrat's grade is high enough)
+- Constant grade required to execute (execution only possible if bureaucrat's grade is high enough)
 
+**Grade Rules:**
+- Same constraints as Bureaucrat (1-150 range with exceptions)
+
+### Implementation
 ```cpp
-class	Form
+class Form
 {
-	public:
-		// Constructors and destructors
-		Form();
-		Form (const std::string name, bool _isSigned, \
-			const int _formSigningGrade, const int _formExcecutingGrade);
-		Form(const Form& other);
-		Form& operator=(const Form& other);
-		~Form();
+public:
+    // Constructors and destructors
+    Form();
+    Form(const std::string name, bool _isSigned, \
+         const int _formSigningGrade, const int _formExecutingGrade);
+    Form(const Form& other);
+    Form& operator=(const Form& other);
+    ~Form();
 
-		// Exception classes
-		class GradeTooHighException : public std::exception
-		{
-			public:
-				virtual const char* what() const throw();
-		};
+    // Exception classes
+    class GradeTooHighException : public std::exception
+    {
+    public:
+        virtual const char* what() const throw();
+    };
 
-		class GradeTooLowException : public std::exception
-		{
-			public:
-				virtual const char* what() const throw();
-		};
-		
-		// Getters
-		const std::string&	getName() const;
-		bool				getSignatureStatus() const;
-		int					getFormSigningGrade() const;
-		int					getFormExcecutingGrade() const;
+    class GradeTooLowException : public std::exception
+    {
+    public:
+        virtual const char* what() const throw();
+    };
+    
+    // Getters
+    const std::string&  getName() const;
+    bool                getSignatureStatus() const;
+    int                 getFormSigningGrade() const;
+    int                 getFormExecutingGrade() const;
 
-		// // Member function
-		void				beSigned(const Bureaucrat& bureaucrat);
-	private:
-		const std::string	_name;
-		bool				_isSigned;
-		const int			_formSigningGrade;
-		const int 			_formExecutingGrade;
+    // Member function
+    void                beSigned(const Bureaucrat& bureaucrat);
+
+private:
+    const std::string   _name;
+    bool                _isSigned;
+    const int           _formSigningGrade;
+    const int           _formExecutingGrade;
 };
 ```
 
-The following member functions are specific to the Form class:
-- beSigned() member function: it changes the form's _isSigned status if the grade is high enough (greater or equal to the required one in the Form class). If too low, throw a GradeTooLowException.
+### Member Function: `beSigned()`
+- Changes `_isSigned` status to `true` if the bureaucrat's grade is high enough (≥ required grade)
+- Throws `GradeTooLowException` if bureaucrat's grade is insufficient
 
-Learning: exceptions can be thrown anywhere in code. 
+### 💡 Key Learning
+**Exceptions can be thrown anywhere in code** - not just in constructors!
 
 ---
 
-## ex02
+## 🎨 ex02: Abstract Classes + Exceptions
+*(To be completed)*
+
+---
+
+## 📖 Study Notes
+*Use this space to add your own insights and key takeaways as you work through the exercises*
