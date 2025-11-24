@@ -20,7 +20,7 @@ class	Form
 		// Constructors and destructors
 		Form();
 		Form (const std::string name, bool _isSigned, \
-			const int _formSigningGrade, const int _formExcecutingGrade);
+			const int _minimumGradeSigning, const int _formExcecutingGrade);
 		Form(const Form& other);
 		Form& operator=(const Form& other);
 		~Form();
@@ -41,16 +41,16 @@ class	Form
 		// Getters
 		const std::string&	getFormName() const;                                                                                                                                                                                                                          
 		bool				getFormSignatureStatus() const;
-		int					getFormSigningGrade() const;
-		int					getFormExcecutingGrade() const;
+		int					getMinSigningGrade() const;
+		int					getMinExcecutingGrade() const;
 
 		// // Member function
 		void			beSigned(const Bureaucrat& bureaucrat);
 	private:
 		const std::string	_name;
 		bool				_isSigned;
-		const int			_formSigningGrade;
-		const int 			_formExecutingGrade;
+		const int			_minimumGradeSigning;
+		const int 			_minimumGradeExecuting;
 };
 
 class Bureaucrat;

@@ -10,32 +10,31 @@
 
 //	Default constructor
 Form::Form()
-	: _name("Contract"), _isSigned(false), _formSigningGrade(10),
-	_formExecutingGrade(10) {
+	: _name("Contract"), _isSigned(false), _minimumGradeSigning(10),
+	_minimumGradeExecuting(10) {
 }
 
 //Constructor with arguments 
 Form::Form (const std::string name, bool isSigned, \
 	const int formSigningGrade, const int formExcecutingGrade)
-	: _name(name), _isSigned(isSigned), _formSigningGrade(formSigningGrade),
-	_formExecutingGrade(formExcecutingGrade) {
-	
-	if (_formSigningGrade < 1)
+	: _name(name), _isSigned(isSigned), _minimumGradeSigning(formSigningGrade),
+	_minimumGradeExecuting(formExcecutingGrade)
+{
+	if (_minimumGradeSigning < 1)
 		throw GradeTooHighException();
-	if (_formSigningGrade > 150)
+	if (_minimumGradeSigning > 150)
 		throw GradeTooLowException();
 
-	if (_formExecutingGrade < 1)
+	if (_minimumGradeExecuting < 1)
 		throw GradeTooHighException();
-	if (_formExecutingGrade > 150)
+	if (_minimumGradeExecuting > 150)
 		throw GradeTooLowException();
 }
 
 //	Copy Constructor
 Form::Form(const Form& other)
-	: _name(other._name), _isSigned(other._isSigned), _formSigningGrade(other._formSigningGrade),
-	_formExecutingGrade(other._formExecutingGrade) {}
-
+	: _name(other._name), _isSigned(other._isSigned), _minimumGradeSigning(other._minimumGradeSigning),
+	_minimumGradeExecuting(other._minimumGradeExecuting) {}
 
 // Copy Assignment Constructor
 Form& Form::operator=(const Form& other) {
@@ -62,12 +61,12 @@ bool	Form::getFormSignatureStatus() const {
 	return (this->_isSigned);
 }
 
-int			Form::getFormSigningGrade() const {
-	return (this->_formSigningGrade);
+int			Form::getMinSigningGrade() const {
+	return (this->_minimumGradeSigning);
 }
 
-int			Form::getFormExcecutingGrade() const {
-	return (this->_formExecutingGrade);
+int			Form::getMinExcecutingGrade() const {
+	return (this->_minimumGradeExecuting);
 }
 
 // =============================================================================
@@ -84,7 +83,7 @@ const char* Form::GradeTooLowException::what() const throw() { return ("Exceptio
 
 void	Form::beSigned(const Bureaucrat& bureaucrat)
 {
-	if (bureaucrat.getGrade() > _formSigningGrade)
+	if (bureaucrat.getGrade() > _minimumGradeSigning)
 		throw Form::GradeTooLowException();
 	_isSigned = true;
 }
@@ -97,7 +96,7 @@ std::ostream& operator<<(std::ostream& outstream, const Form& form)
 {
 	outstream << "\nForm name: " << form.getFormName() << '\n'
 			<< "Form signature status: " << form.getFormSignatureStatus() << '\n'
-			<< "Form grade required for executing: " << form.getFormExcecutingGrade() << '\n'
-			<< "Form grade required for signing: " << form.getFormSigningGrade();
+			<< "Form grade required for executing: " << form.getMinExcecutingGrade() << '\n'
+			<< "Form grade required for signing: " << form.getMinSigningGrade();
 	return (outstream);
 }
