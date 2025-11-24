@@ -16,7 +16,7 @@ Form::Form()
 
 Form::Form (const std::string name, bool isSigned, \
 	const int formSigningGrade, const int formExcecutingGrade)
-	: _name(name), _isSigned(false), _formSigningGrade(formSigningGrade),
+	: _name(name), _isSigned(isSigned), _formSigningGrade(formSigningGrade),
 	_formExecutingGrade(formExcecutingGrade) {
 	if (_formSigningGrade < 1)
 		throw GradeTooHighException();
@@ -29,24 +29,24 @@ Form::Form (const std::string name, bool isSigned, \
 		throw GradeTooLowException();
 }
 
-// //	Copy Constructor
-// Bureaucrat::Bureaucrat(const Bureaucrat& other)
-// 	: _name(other._name), _grade(other._grade) {}
+//	Copy Constructor
+Form::Form(const Form& other)
+	: _name(other._name), _isSigned(other._isSigned), _formSigningGrade(other._formSigningGrade),
+	_formExecutingGrade(other._formExecutingGrade) {}
 
 
-// //	Copy Assignment Operator
-// Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other) {
-// 	if (this == &other)
-// 		return (*this);
-// 	this->_grade = other._grade;
-// 	return (*this);
-// }
+// Copy Assignment Constructor
+Form& Form::operator=(const Form& other) {
+	if (this != &other)
+		_isSigned = other._isSigned;
+	return (*this);
+}
 
-// // Destructor
-// Bureaucrat::~Bureaucrat() {
-// 	std::cout << RED << "Bureaucrat " << this->getName()
-// 			<< " destroyed" << RESET << '\n';
-// }
+// Destructor
+Form::~Form() {
+	std::cout << RED << "Form " << this->getName()
+			<< " destroyed" << RESET << '\n';
+}
 
 // =============================================================================
 // Accessors (Getters)
@@ -86,22 +86,22 @@ int			Form::getFormExcecutingGrade() const {
 // 		throw GradeTooLowException();
 // }
 
-// // =============================================================================
-// // Exception Implementations
-// // =============================================================================
+// =============================================================================
+// Exception Implementations
+// =============================================================================
 
-// const char* Bureaucrat::GradeTooHighException::what() const throw() { return ("Exeption: Grade too high!"); }
+const char* Form::GradeTooHighException::what() const throw() { return ("Exeption: Grade too high!"); }
 
-// const char* Bureaucrat::GradeTooLowException::what() const throw() { return ("Exception: Grade too low!"); }
+const char* Form::GradeTooLowException::what() const throw() { return ("Exception: Grade too low!"); }
 
 // =============================================================================
 // Member functions
 // =============================================================================
 
-void				beSigned(const Bureaucrat& bureaucrat)
-{
+// void				beSigned(const Bureaucrat& bureaucrat)
+// {
 
-}
+// }
 
 // =============================================================================
 // Stream Operators

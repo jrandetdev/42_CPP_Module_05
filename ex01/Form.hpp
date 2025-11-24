@@ -21,17 +21,19 @@ class	Form
 		Form();
 		Form (const std::string name, bool _isSigned, \
 			const int _formSigningGrade, const int _formExcecutingGrade);
-		// Form(const Form& other);
-		// Form& operator=(const Form& other);
-		// ~Form();
+		Form(const Form& other);
+		Form& operator=(const Form& other);
+		~Form();
 
 		// Exception classes
-		class GradeTooHighException : public std::exception {
+		class GradeTooHighException : public std::exception
+		{
 			public:
 				virtual const char* what() const throw();
 		};
 
-		class GradeTooLowException : public std::exception {
+		class GradeTooLowException : public std::exception
+		{
 			public:
 				virtual const char* what() const throw();
 		};

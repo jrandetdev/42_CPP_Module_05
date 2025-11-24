@@ -31,14 +31,14 @@ class Bureaucrat
 		// Exception classes
 		class GradeTooHighException : public std::exception
 		{
-		public:
-			virtual const char* what() const throw();
+			public:
+				virtual const char* what() const throw();
 		};
 
 		class GradeTooLowException : public std::exception
 		{
-		public:
-			virtual const char* what() const throw();
+			public:
+				virtual const char* what() const throw();
 		};
 
 		// Getters
@@ -57,4 +57,4 @@ class Bureaucrat
 // Stream insertion operator
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& bureaucrat);
 
-#endif // BUREAUCRAT_HPP
+#endif

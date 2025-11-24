@@ -101,8 +101,8 @@ Goal of the excercise: Creation of the Form class.
 A form has the following **private** (not protected) attributes (with corresponding getters for the public interface of the class)
 - A constant name
 - A boolean indifcating whether it is signed (not signed at construction, so bool _isSigned = false)
-- A constant grade required to sign it
-- A constant grade required to execute it
+- A constant grade required to sign it. (if grade is not high enough, _isSigned will not change)
+- A constant grade required to execute it (if grade is not high enough, _isSigned will not change)
 
 ```cpp
 class	Form
@@ -110,20 +110,24 @@ class	Form
 	public:
 		// Constructors and destructors
 		Form();
-		// Form(const Form& other);
-		// Form& operator=(const Form& other);
-		// ~Form();
+		Form (const std::string name, bool _isSigned, \
+			const int _formSigningGrade, const int _formExcecutingGrade);
+		Form(const Form& other);
+		Form& operator=(const Form& other);
+		~Form();
 
-		// // Exception classes
-		// class GradeTooHighException : public std::exception {
-		// 	public:
-		// 		virtual const char* what() const throw();
-		// };
+		// Exception classes
+		class GradeTooHighException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
 
-		// class GradeTooLowException : public std::exception {
-		// 	public:
-		// 		virtual const char* what() const throw();
-		// };
+		class GradeTooLowException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
 		
 		// Getters
 		const std::string&	getName() const;
@@ -131,15 +135,14 @@ class	Form
 		int					getFormSigningGrade() const;
 		int					getFormExcecutingGrade() const;
 
-		// Member function
-		void				beSigned(const Bureaucrat& bureaucrat);
+		// // Member function
+		// void				beSigned(const Bureaucrat& bureaucrat);
 	private:
 		const std::string	_name;
 		bool				_isSigned;
 		const int			_formSigningGrade;
 		const int 			_formExecutingGrade;
 };
-
 ```
 The grades obey the same rules as the Bureaucrat (1 - 150 and exceptions).
 
