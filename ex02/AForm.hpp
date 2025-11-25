@@ -12,8 +12,8 @@ class	AForm
 	public:
 		// Constructors and destructors
 		AForm();
-		AForm (const std::string name, bool _isSigned, \
-			const int _minimumGradeSigning, const int _AFormExcecutingGrade);
+		AForm (const std::string name, const int formSigningGrade,
+				const int formExcecutingGrade);
 		AForm(const AForm& other);
 		AForm& operator=(const AForm& other);
 		virtual ~AForm() = 0;
@@ -32,17 +32,21 @@ class	AForm
 		};
 		
 		// Getters const std::string&	getFormName() const;                                                                                                                                                                                                                          
+		const std::string&	getFormName() const;                                                                                                                                                                                                                          
 		bool				getFormSignatureStatus() const;
-		int					getMinSigningGrade() const;
-		int					getMinExcecutingGrade() const;
+		int					getSigningGrade() const;
+		int					getExecutingGrade() const;
 
 		// // Member function
-		virtual void		beSigned(const Bureaucrat& bureaucrat) = 0;
+		virtual void		beSigned(const Bureaucrat& bureaucrat);
+		virtual void 		execute(Bureaucrat const & executor) const; // calls the executeFormAction
+	protected:
+		virtual void		executeFormAction(void) = 0;
 	private:
 		const std::string	_name;
 		bool				_isSigned;
-		const int			_minimumGradeSigning;
-		const int 			_minimumGradeExecuting;
+		const int			_SigningGrade;
+		const int 			_ExecutingGrade;
 };
 
 class Bureaucrat;

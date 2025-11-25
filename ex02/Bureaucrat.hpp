@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <exception>
+#include "AForm.hpp"
 
 // Color codes for terminal output
 #define RED     "\033[31m"
@@ -51,6 +52,7 @@ class Bureaucrat
 
 		// Member function
 		void	signForm(Form& form);
+		void	execute(AForm const& form);
 	private:
 		const std::string   _name;
 		int                 _grade;

@@ -136,43 +136,43 @@ Create a `Form` class that requires appropriate bureaucrat grades for signing an
 ```cpp
 class Form
 {
-public:
-    // Constructors and destructors
-    Form();
-    Form(const std::string name, bool _isSigned, \
-         const int _formSigningGrade, const int _formExecutingGrade);
-    Form(const Form& other);
-    Form& operator=(const Form& other);
-    ~Form();
-
-    // Exception classes
-    class GradeTooHighException : public std::exception
-    {
     public:
-        virtual const char* what() const throw();
+        // Constructors and destructors
+        Form();
+        Form(const std::string name, bool _isSigned, \
+            const int _formSigningGrade, const int _formExecutingGrade);
+        Form(const Form& other);
+        Form& operator=(const Form& other);
+        ~Form();
+
+        // Exception classes
+        class GradeTooHighException : public std::exception
+        {
+        public:
+            virtual const char* what() const throw();
+        };
+
+        class GradeTooLowException : public std::exception
+        {
+        public:
+            virtual const char* what() const throw();
+        };
+        
+        // Getters
+        const std::string&  getName() const;
+        bool                getSignatureStatus() const;
+        int                 getFormSigningGrade() const;
+        int                 getFormExecutingGrade() const;
+
+        // Member function
+        void                beSigned(const Bureaucrat& bureaucrat);
+
+    private:
+        const std::string   _name;
+        bool                _isSigned;
+        const int           _formSigningGrade;
+        const int           _formExecutingGrade;
     };
-
-    class GradeTooLowException : public std::exception
-    {
-    public:
-        virtual const char* what() const throw();
-    };
-    
-    // Getters
-    const std::string&  getName() const;
-    bool                getSignatureStatus() const;
-    int                 getFormSigningGrade() const;
-    int                 getFormExecutingGrade() const;
-
-    // Member function
-    void                beSigned(const Bureaucrat& bureaucrat);
-
-private:
-    const std::string   _name;
-    bool                _isSigned;
-    const int           _formSigningGrade;
-    const int           _formExecutingGrade;
-};
 ```
 
 The following member functions are specific to the Form class:
@@ -189,3 +189,6 @@ Back to abstract classes for a refresher. A Virtual fucntions are made in the ba
 - Pure virtual functions are not defined and need to be defined by the derived classes.
 - Abstract classes cannot be instantiated
 - Late binding or dynamic binding is performed when the virtual keyword is used in a method's declaration. C++ will create a virtual table, which is a lookup table for such functions that will always be consulted when they are called.
+- An Abstract class ensures common structure to all derived classes
+
+private members are not accessible by derived classes 
