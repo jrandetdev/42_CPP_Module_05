@@ -5,6 +5,8 @@
 #include <iomanip>
 #include <exception>
 
+
+// base class of the form class for ther other classes
 class	AForm
 {
 	public:
@@ -14,7 +16,7 @@ class	AForm
 			const int _minimumGradeSigning, const int _AFormExcecutingGrade);
 		AForm(const AForm& other);
 		AForm& operator=(const AForm& other);
-		~AForm();
+		virtual ~AForm() = 0;
 
 		// Exception classes
 		class GradeTooHighException : public std::exception
@@ -29,14 +31,13 @@ class	AForm
 				virtual const char* what() const throw();
 		};
 		
-		// Getters
-		const std::string&	getFormName() const;                                                                                                                                                                                                                          
+		// Getters const std::string&	getFormName() const;                                                                                                                                                                                                                          
 		bool				getFormSignatureStatus() const;
 		int					getMinSigningGrade() const;
 		int					getMinExcecutingGrade() const;
 
 		// // Member function
-		void			beSigned(const Bureaucrat& bureaucrat);
+		virtual void		beSigned(const Bureaucrat& bureaucrat) = 0;
 	private:
 		const std::string	_name;
 		bool				_isSigned;
