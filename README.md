@@ -175,19 +175,17 @@ private:
 };
 ```
 
-### Member Function: `beSigned()`
-- Changes `_isSigned` status to `true` if the bureaucrat's grade is high enough (≥ required grade)
-- Throws `GradeTooLowException` if bureaucrat's grade is insufficient
+The following member functions are specific to the Form class:
+- beSigned() member function: it changes the form's _isSigned status if the grade is high enough (greater or equal to the required one in the Form class). If too low, throw a GradeTooLowException.
 
-### Key Learning
-**Exceptions can be thrown anywhere in code** - not just in constructors!
+Learning: exceptions can be thrown anywhere in code. 
 
 ---
 
-## ex02: Abstract Classes + Exceptions
-*(To be completed)*
+## ex02
 
----
-
-## Study Notes
-
+Back to abstract classes for a refresher. A Virtual fucntions are made in the base class, in this case the AForm class which will then be inherited by all of its special form derived classes.
+- An Abstract class which contains pure virtual functions (at least one) with = 0. 
+- Pure virtual functions are not defined and need to be defined by the derived classes.
+- Abstract classes cannot be instantiated
+- Late binding or dynamic binding is performed when the virtual keyword is used in a method's declaration. C++ will create a virtual table, which is a lookup table for such functions that will always be consulted when they are called.
