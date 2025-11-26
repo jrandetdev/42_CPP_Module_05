@@ -1,6 +1,6 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
-#include <iomanip>
+#include <iostream>
 #include <string>
 #include <exception>
 
@@ -10,7 +10,10 @@
 
 //	Default constructor
 AForm::AForm() : _name("Contract"), _isSigned(false), _SigningGrade(10),
-	_ExecutingGrade(10) {}
+	_ExecutingGrade(10) 
+{
+	std::cout << "AForm base class constructed" << std::endl;
+}
 
 //Constructor with arguments 
 AForm::AForm (const std::string name, const int formSigningGrade, const int formExcecutingGrade)
@@ -26,6 +29,8 @@ AForm::AForm (const std::string name, const int formSigningGrade, const int form
 		throw GradeTooHighException();
 	if (_ExecutingGrade > 150)
 		throw GradeTooLowException();
+
+	std::cout << "AForm base class constructed" << std::endl;
 }
 
 //	Copy Constructor

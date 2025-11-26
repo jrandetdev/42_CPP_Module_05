@@ -6,6 +6,7 @@ PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardonForm
 // Copy Constructor
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other) : AForm(other) {}
 
+// Copy Assignment constructor
 PresidentialPardonForm& PresidentialPardonForm::operator =(const PresidentialPardonForm& other)
 {
 	if (this != &other)
@@ -15,4 +16,5 @@ PresidentialPardonForm& PresidentialPardonForm::operator =(const PresidentialPar
 	return (*this);
 }
 
+// Destructor
 PresidentialPardonForm::~PresidentialPardonForm() {}
