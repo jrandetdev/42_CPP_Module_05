@@ -184,11 +184,45 @@ Learning: exceptions can be thrown anywhere in code.
 
 ## ex02
 
-Back to abstract classes for a refresher. A Virtual fucntions are made in the base class, in this case the AForm class which will then be inherited by all of its special form derived classes.
-- An Abstract class which contains pure virtual functions (at least one) with = 0. 
-- Pure virtual functions are not defined and need to be defined by the derived classes.
-- Abstract classes cannot be instantiated
-- Late binding or dynamic binding is performed when the virtual keyword is used in a method's declaration. C++ will create a virtual table, which is a lookup table for such functions that will always be consulted when they are called.
-- An Abstract class ensures common structure to all derived classes
+In this excercise, the class Form must be an abstract class and is renamed AForm. The form's attributes need to remain private and belong to the base class.
 
-private members are not accessible by derived classes 
+We use inheritance for the forms, meaning all the derived or child classes of the AForm class first construct a base class "Base" and then add features onto it. 
+
+The three deirved forms:
+
+- ShrubberyCreationForm:
+    - required formSigningGrade: 145
+    - required formExecutingGrade: 137
+    - **Action:** Creates a file <target>_shrubbery int he working directory with an ascii tree inside it.
+
+- RobotomyRequestForm:
+    - required formSigningGrade: 72
+    - required formExecutingGrade: 45
+    - **Action:** Makes drilling noises, then informs that <targt> has been robotomized successfully in 50% of the cases. Otherwise it informs that the robotomy failes (two cases in if else with exceptions)
+
+- RoPresidentialPardonForm:
+    - required formSigningGrade: 25
+    - required formExecutingGrade: 5
+    - **Action:** Informs that <target> has been pardonne by Zaphod Beeblebrox 
+
+All of them take only *only one parameter* in their constructor: the target of the form. For example "home" if you want to plant shrubberry at home. 
+
+`execute(Bureaucrat const & executor) const` member function needs to be added to the base AForm class AND implement *a function* to execute the form's **action** in the concrete classes.
+
+Checks in order to execute(Bureaucrat const & executor)
+- is the form signed? -> yes / no
+- is the grade of the bureaucrat attempting to execute it high enough? -> yes / no
+
+Otherwise, throw approriate exception. (another exception to write)
+
+These checks can me made in two manners:
+- in each concrete class
+- in the base class
+AND then call a function to execute them. One way is more elegant than the other (base class)
+
+`executeForm(AForm const & form) const` member function needs to be added to Bureaucrat class. It must attempt to execute the form. If successful:
+
+```cpp
+std::cout << <bureaucrat> executed <form> << std::endl
+```
+

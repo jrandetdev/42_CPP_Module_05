@@ -5,6 +5,7 @@
 #include <iomanip>
 #include "AForm.hpp"
 
+
 class	ShrubberyCreationForm : public AForm
 {
 	public:
@@ -12,7 +13,7 @@ class	ShrubberyCreationForm : public AForm
 		ShrubberyCreationForm(const ShrubberyCreationForm& other);
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
 		~ShrubberyCreationForm();
-		void		beSigned(const Bureaucrat& bureaucrat);
+		//void		beSigned(const Bureaucrat& bureaucrat);
 };
 
 #endif

@@ -4,7 +4,6 @@
 #include <iostream>
 #include <string>
 #include <exception>
-#include "AForm.hpp"
 
 // Color codes for terminal output
 #define RED     "\033[31m"
@@ -13,7 +12,7 @@
 #define BLUE    "\033[34m"
 #define RESET   "\033[0m"
 
-class Form;
+class AForm;
 
 /**
  * @brief Bureaucrat with a name and grade (1-150).
@@ -51,8 +50,8 @@ class Bureaucrat
 		void decrementBureaucratGrade();
 
 		// Member function
-		void	signForm(Form& form);
-		void	execute(AForm const& form);
+		void	signForm(AForm& form);
+		void	executeForm(AForm const& form);
 	private:
 		const std::string   _name;
 		int                 _grade;

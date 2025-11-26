@@ -1,23 +1,18 @@
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm() : _name("Shruberry Form"), _isSigned(false),
-	_SigningGrade(25), _ExcecutingGrade(5) {}
+// Default constructor, calls the AForm constructor with arguments inside it
+PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardonForm", 25, 5) {}
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other)
-{
-
-}
+// Copy Constructor
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other) : AForm(other) {}
 
 PresidentialPardonForm& PresidentialPardonForm::operator =(const PresidentialPardonForm& other)
 {
 	if (this != &other)
 	{
-		_isSigned = other._isSigned;
+		AForm::operator=(other);
 	}
 	return (*this);
 }
 
-PresidentialPardonForm::~PresidentialPardonForm()
-{
-
-}
+PresidentialPardonForm::~PresidentialPardonForm() {}

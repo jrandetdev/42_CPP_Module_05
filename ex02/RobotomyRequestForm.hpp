@@ -12,7 +12,7 @@ class	RobotomyRequestForm : public AForm
 		RobotomyRequestForm(const RobotomyRequestForm& other);
 		RobotomyRequestForm& operator=(const RobotomyRequestForm& other);
 		~RobotomyRequestForm();
-		void		beSigned(const Bureaucrat& bureaucrat);
+		//void		beSigned(const Bureaucrat& bureaucrat);
 };
 
 #endif

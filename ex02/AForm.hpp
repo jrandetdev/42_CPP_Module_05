@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <exception>
 
+class Bureaucrat;
 
 // base class of the form class for ther other classes
 class	AForm
@@ -12,11 +13,10 @@ class	AForm
 	public:
 		// Constructors and destructors
 		AForm();
-		AForm (const std::string name, const int formSigningGrade,
-				const int formExcecutingGrade);
+		AForm (const std::string name, const int formSigningGrade, const int formExcecutingGrade);
 		AForm(const AForm& other);
 		AForm& operator=(const AForm& other);
-		virtual ~AForm() = 0;
+		virtual ~AForm();
 
 		// Exception classes
 		class GradeTooHighException : public std::exception
@@ -39,9 +39,9 @@ class	AForm
 
 		// // Member function
 		virtual void		beSigned(const Bureaucrat& bureaucrat);
-		virtual void 		execute(Bureaucrat const & executor) const; // calls the executeFormAction
+		//virtual void 		execute(Bureaucrat const & executor) const; // calls the executeFormAction
 	protected:
-		virtual void		executeFormAction(void) = 0;
+		//virtual void		executeFormAction(void) = 0;
 	private:
 		const std::string	_name;
 		bool				_isSigned;
@@ -49,9 +49,9 @@ class	AForm
 		const int 			_ExecutingGrade;
 };
 
-class Bureaucrat;
+//class Bureaucrat;
 
 // Stream insertion operator
-std::ostream& operator<<(std::ostream& os, const Form& form);
+std::ostream& operator<<(std::ostream& os, const AForm& form);
 
 #endif

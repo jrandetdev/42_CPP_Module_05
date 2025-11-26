@@ -1,5 +1,5 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 #include <iomanip>
 #include <string>
 #include <exception>
@@ -83,7 +83,7 @@ const char* Bureaucrat::GradeTooLowException::what() const throw() { return ("Ex
 // =============================================================================
 
 //changes bool _isSigned if the grade of the Bureaucrat is high enough for the form
-void	Bureaucrat::signForm(Form& form)
+void	Bureaucrat::signForm(AForm& form)
 {
 	try
 	{
@@ -101,9 +101,9 @@ void	Bureaucrat::signForm(Form& form)
 // Signing form member function
 // =============================================================================
 
-void	Bureaucrat::execute(AForm const& form)
+void	Bureaucrat::executeForm(AForm const& form)
 {
-	
+	(void)form;
 }
 
 // =============================================================================

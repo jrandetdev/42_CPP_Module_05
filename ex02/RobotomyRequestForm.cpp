@@ -1,22 +1,16 @@
 #include "RobotomyRequestForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm() : _name("Shruberry Form"), _isSigned(false),
-	_SigningGrade(72), _ExcecutingGrade(45) {}
+RobotomyRequestForm::RobotomyRequestForm() : AForm("Robotomy Request Form", 72, 45) {}
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other) :
-	_name(other._name), _isSigned(other._isSigned), _SigningGrade(other._SigningGrade),
-	_ExcecutingGrade(other._ExcecutingGrade) {}
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other) : AForm(other) {}
 
-PresidentialPardonForm& PresidentialPardonForm::operator =(const PresidentialPardonForm& other)
+RobotomyRequestForm& RobotomyRequestForm::operator =(const RobotomyRequestForm& other)
 {
 	if (this != &other)
 	{
-		_isSigned = other._isSigned;
+		AForm::operator=(other);
 	}
 	return (*this);
 }
 
-PresidentialPardonForm::~PresidentialPardonForm()
-{
-
-}
+RobotomyRequestForm::~RobotomyRequestForm() {}
