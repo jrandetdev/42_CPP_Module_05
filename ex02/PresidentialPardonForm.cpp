@@ -1,7 +1,9 @@
 #include "PresidentialPardonForm.hpp"
 
 // Default constructor, calls the AForm constructor with arguments inside it
-PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardonForm", 25, 5) {}
+PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardonForm", 25, 5, "Default Target") {}
+
+PresidentialPardonForm::PresidentialPardonForm(std::string &target) : AForm("PresidentialPardonForm", 25, 5, target) {}
 
 // Copy Constructor
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other) : AForm(other) {}

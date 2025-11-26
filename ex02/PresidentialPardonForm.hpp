@@ -3,13 +3,11 @@
 
 #include "AForm.hpp"
 
-// virtzual base class, the most derived implementation will be executed
-
 class	PresidentialPardonForm : public AForm
 {
 	public:
 		PresidentialPardonForm();
-		PresidentialPardonForm(const std::string& target);
+		PresidentialPardonForm(std::string& target);
 		PresidentialPardonForm(const PresidentialPardonForm& other);
 		PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
 		~PresidentialPardonForm();

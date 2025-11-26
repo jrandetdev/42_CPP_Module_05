@@ -13,12 +13,17 @@ class	AForm
 	public:
 		// Constructors and destructors
 		AForm();
-		AForm (const std::string name, const int formSigningGrade, const int formExcecutingGrade);
+		AForm (const std::string name, const int formSigningGrade, const int formExcecutingGrade, const std::string &target);
 		AForm(const AForm& other);
 		AForm& operator=(const AForm& other);
 		virtual ~AForm();
 
-		// Exception classes
+		const std::string&	getFormName() const;                                                                                                                                                                                                                          
+		bool				getFormSignatureStatus() const;
+		int					getSigningGrade() const;
+		int					getExecutingGrade() const;
+		const std::string&	getTarget() const;
+
 		class GradeTooHighException : public std::exception
 		{
 			public:
@@ -30,14 +35,6 @@ class	AForm
 			public:
 				virtual const char* what() const throw();
 		};
-		
-		// Getters const std::string&	getFormName() const;                                                                                                                                                                                                                          
-		const std::string&	getFormName() const;                                                                                                                                                                                                                          
-		bool				getFormSignatureStatus() const;
-		int					getSigningGrade() const;
-		int					getExecutingGrade() const;
-
-		// // Member function
 		virtual void		beSigned(const Bureaucrat& bureaucrat);
 		//virtual void 		execute(Bureaucrat const & executor) const; // calls the executeFormAction
 	protected:
@@ -47,9 +44,9 @@ class	AForm
 		bool				_isSigned;
 		const int			_SigningGrade;
 		const int 			_ExecutingGrade;
-};
+		std::string			_target;
 
-//class Bureaucrat;
+};
 
 // Stream insertion operator
 std::ostream& operator<<(std::ostream& os, const AForm& form);

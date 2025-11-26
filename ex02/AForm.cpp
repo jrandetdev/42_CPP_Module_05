@@ -10,15 +10,15 @@
 
 //	Default constructor
 AForm::AForm() : _name("Contract"), _isSigned(false), _SigningGrade(10),
-	_ExecutingGrade(10) 
+	_ExecutingGrade(10), _target("default target")
 {
 	std::cout << "AForm base class constructed" << std::endl;
 }
 
 //Constructor with arguments 
-AForm::AForm (const std::string name, const int formSigningGrade, const int formExcecutingGrade)
+AForm::AForm (const std::string name, const int formSigningGrade, const int formExcecutingGrade, const std::string &target)
 	: _name(name), _isSigned(false), _SigningGrade(formSigningGrade),
-	_ExecutingGrade(formExcecutingGrade)
+	_ExecutingGrade(formExcecutingGrade), _target(target)
 {
 	if (_SigningGrade < 1)
 		throw GradeTooHighException();
@@ -39,14 +39,16 @@ AForm::AForm(const AForm& other)
 	_ExecutingGrade(other._ExecutingGrade) {}
 
 // Copy Assignment Constructor (only _isSigned can be changed)
-AForm& AForm::operator=(const AForm& other) {
+AForm& AForm::operator=(const AForm& other)
+{
 	if (this != &other)
 		_isSigned = other._isSigned;
 	return (*this); 
 }
 
 // Destructor
-AForm::~AForm() {
+AForm::~AForm()
+{
 	std::cout << RED << "Form " << this->getFormName()
 			<< " destroyed" << RESET << '\n';
 }
@@ -55,21 +57,21 @@ AForm::~AForm() {
 // Accessors (Getters)
 // =============================================================================
 
-const std::string&	AForm::getFormName() const {
+const std::string&	AForm::getFormName() const
+{
 	return (this->_name);
 }
 
-bool	AForm::getFormSignatureStatus() const {
+bool	AForm::getFormSignatureStatus() const
+{
 	return (this->_isSigned);
 }
 
-int	AForm::getSigningGrade() const {
-	return (this->_SigningGrade);
-}
+int	AForm::getSigningGrade() const { return (this->_SigningGrade); }
 
-int	AForm::getExecutingGrade() const {
-	return (this->_ExecutingGrade);
-}
+int	AForm::getExecutingGrade() const { return (this->_ExecutingGrade); }
+
+const std::string &AForm::getTarget() const { return (this->_target); }
 
 // =============================================================================
 // Exception Implementations
@@ -100,6 +102,7 @@ std::ostream& operator<<(std::ostream& outstream, const AForm& form)
 	outstream << "Form name: " << form.getFormName() << '\n'
 			<< "Form signature status: " << form.getFormSignatureStatus() << '\n'
 			<< "Form grade required for executing: " << form.getExecutingGrade() << '\n'
-			<< "Form grade required for signing: " << form.getSigningGrade();
+			<< "Form grade required for signing: " << form.getSigningGrade() << '\n'
+			<< "Target: " << form.getTarget();
 	return (outstream);
 }

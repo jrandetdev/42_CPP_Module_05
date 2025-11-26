@@ -10,7 +10,7 @@
 
 void	DerivedClassConstruction()
 {
-	std::cout << YELLOW << "\nTest 1: Creating the different forms with their specifics" << RESET << '\n' << '\n';
+	std::cout << YELLOW << "\nTest 1: Constructing basic derived classes" << RESET << '\n' << '\n';
 
 	ShrubberyCreationForm Shrubtest;
 	std::cout << YELLOW << Shrubtest << RESET << std::endl;
@@ -27,7 +27,35 @@ void	DerivedClassConstruction()
 
 }
 
+
+void	DerivedClassConstructionWithTarget()
+{
+	std::cout << YELLOW << "\nTest 2: Constructing forms with target" << RESET << '\n' << '\n';
+
+	std::string target;
+
+	target = "Home";
+	ShrubberyCreationForm Shrubtest(target);
+	std::cout << YELLOW << Shrubtest << RESET << std::endl;
+
+	std::cout << '\n';
+
+	target = "Villa";
+	RobotomyRequestForm Robottest(target);
+	std::cout << GREEN << Robottest << RESET << std::endl;
+
+	std::cout << '\n';
+
+	target = "Chalet";
+	PresidentialPardonForm Presidentialtest(target);
+	std::cout << BLUE << Presidentialtest << RESET << std::endl;
+	
+
+}
+
 int main()
 {
 	DerivedClassConstruction();
+	DerivedClassConstructionWithTarget();
+	return (0);
 }
