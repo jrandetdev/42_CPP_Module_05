@@ -13,6 +13,7 @@ class	PresidentialPardonForm : public AForm
 		~PresidentialPardonForm();
 		
 		//void		beSigned(const Bureaucrat& bureaucrat);
+		void		executeFormAction(void);
 };
 
 

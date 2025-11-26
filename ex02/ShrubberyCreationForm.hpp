@@ -16,7 +16,7 @@ class	ShrubberyCreationForm : public AForm
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
 		~ShrubberyCreationForm();
 		//void		beSigned(const Bureaucrat& bureaucrat);
-		//void		executeFormAction(void);
+		void		executeFormAction(void);
 };
 
 #endif

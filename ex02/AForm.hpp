@@ -24,6 +24,9 @@ class	AForm
 		int					getExecutingGrade() const;
 		const std::string&	getTarget() const;
 
+		virtual void		beSigned(const Bureaucrat& bureaucrat);
+		//virtual void 		execute(Bureaucrat const & executor) const; // calls the executeFormAction
+		
 		class GradeTooHighException : public std::exception
 		{
 			public:
@@ -35,17 +38,14 @@ class	AForm
 			public:
 				virtual const char* what() const throw();
 		};
-		virtual void		beSigned(const Bureaucrat& bureaucrat);
-		//virtual void 		execute(Bureaucrat const & executor) const; // calls the executeFormAction
 	protected:
-		//virtual void		executeFormAction(void) = 0;
+		virtual void		executeFormAction(void) = 0;
 	private:
 		const std::string	_name;
 		bool				_isSigned;
 		const int			_SigningGrade;
 		const int 			_ExecutingGrade;
 		std::string			_target;
-
 };
 
 // Stream insertion operator

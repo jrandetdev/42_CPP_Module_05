@@ -37,6 +37,7 @@ void	DerivedClassConstructionWithTarget()
 	target = "Home";
 	ShrubberyCreationForm Shrubtest(target);
 	std::cout << YELLOW << Shrubtest << RESET << std::endl;
+	Shrubtest.executeFormAction();
 
 	std::cout << '\n';
 
@@ -49,8 +50,7 @@ void	DerivedClassConstructionWithTarget()
 	target = "Chalet";
 	PresidentialPardonForm Presidentialtest(target);
 	std::cout << BLUE << Presidentialtest << RESET << std::endl;
-	
-
+	Presidentialtest.executeFormAction();
 }
 
 int main()

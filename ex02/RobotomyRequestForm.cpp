@@ -20,3 +20,8 @@ RobotomyRequestForm& RobotomyRequestForm::operator =(const RobotomyRequestForm& 
 
 // Destructpor
 RobotomyRequestForm::~RobotomyRequestForm() {}
+
+void	RobotomyRequestForm::executeFormAction(void)
+{
+	
+}

@@ -15,11 +15,29 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator =(const ShrubberyCreation
 	return (*this);
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm() {}
+ShrubberyCreationForm::~ShrubberyCreationForm()
+{
 
-// void	ShrubberyCreationForm::executeFormAction(void)
-// {
-// 	std::string	fileName;
+}
 
-// 	fileName = this->
-// }
+void	ShrubberyCreationForm::executeFormAction(void)
+{
+	std::string	fileName;
+
+	fileName = this->getTarget() + "_shrubbery";
+	std::ofstream File(fileName.c_str());
+	File << "            # #### ####\n";
+	File << "         ### \\/#|### |/####\n";
+	File << "        ##\\/#/ \\||/##/_/##/_#\n";
+	File << "        ###  \\/###|/ \\/ # ###\n";
+	File << "      ##_\\_#\\_\\## | #/###_/_####\n";
+	File << "     ## #### # \\ #| /  #### ##/##\n";
+	File << "      __#_--###`  |{,###---###-~\n";
+	File << "                 \\ }{\n";
+	File << "                 }}{\n";
+	File << "                 }}{\n";
+	File << "               ejm  {{}}\n";
+	File << "            , -=-~{ .-^- _\n";
+	
+	File.close();
+}
