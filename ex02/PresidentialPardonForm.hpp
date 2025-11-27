@@ -11,9 +11,9 @@ class	PresidentialPardonForm : public AForm
 		PresidentialPardonForm(const PresidentialPardonForm& other);
 		PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
 		~PresidentialPardonForm();
+		void		executeFormAction(void);
 		
 		//void		beSigned(const Bureaucrat& bureaucrat);
-		void		executeFormAction(void);
 };
 
 

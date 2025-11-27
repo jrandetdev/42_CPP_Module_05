@@ -44,6 +44,23 @@ void	DerivedClassConstructionWithTarget()
 	target = "Villa";
 	RobotomyRequestForm Robottest(target);
 	std::cout << GREEN << Robottest << RESET << std::endl;
+	Robottest.executeFormAction();
+	Robottest.executeFormAction();
+	Robottest.executeFormAction();
+	Robottest.executeFormAction();
+	Robottest.executeFormAction();
+
+	Robottest.executeFormAction();
+
+	Robottest.executeFormAction();
+
+	Robottest.executeFormAction();
+
+	Robottest.executeFormAction();
+
+	Robottest.executeFormAction();
+
+	Robottest.executeFormAction();
 
 	std::cout << '\n';
 
