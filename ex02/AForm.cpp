@@ -30,7 +30,7 @@ AForm::AForm (const std::string name, const int formSigningGrade, const int form
 	if (_ExecutingGrade > 150)
 		throw GradeTooLowException();
 
-	std::cout << "AForm base class constructed" << std::endl;
+	std::cout << "AForm base class constructed" << '\n' << std::endl;
 }
 
 //	Copy Constructor
@@ -100,18 +100,21 @@ void	AForm::execute(Bureaucrat const & executor) const
 {
 	if (this->_isSigned)
 	{
-		if (executor.getGrade() > _SigningGrade)
+		std::cout << "Form is signed, checking the Bureaucrat's executing grade..." << '\n';
+		std::cout << executor.getGrade() << '\n';
+		std::cout << _ExecutingGrade << '\n';
+		if (executor.getGrade() <= _ExecutingGrade)
 		{
 			this->executeFormAction();
 		}
 		else
 		{
-			throw AForm::FormNotSignedException();
+			throw Bureaucrat::GradeTooLowException();
 		}
 	}
 	else
 	{
-		throw Bureaucrat::GradeTooLowException();
+		throw AForm::FormNotSignedException();
 	}
 }
 
@@ -125,6 +128,6 @@ std::ostream& operator<<(std::ostream& outstream, const AForm& form)
 			<< "Form signature status: " << form.getFormSignatureStatus() << '\n'
 			<< "Form grade required for executing: " << form.getExecutingGrade() << '\n'
 			<< "Form grade required for signing: " << form.getSigningGrade() << '\n'
-			<< "Target: " << form.getTarget();
+			<< "Target: " << form.getTarget() << '\n';
 	return (outstream);
 }

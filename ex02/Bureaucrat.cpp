@@ -9,7 +9,7 @@
 // =============================================================================
 
 //	Default constructor
-Bureaucrat::Bureaucrat() : _name("Bob"), _grade(10) {}
+Bureaucrat::Bureaucrat() : _name("Bob"), _grade(10) { std::cout << "Bob created" << '\n'; } 
 
 //	Parametrised constructor
 Bureaucrat::Bureaucrat(const std::string name, int grade)
@@ -19,6 +19,8 @@ Bureaucrat::Bureaucrat(const std::string name, int grade)
 		throw GradeTooHighException();
 	else if (grade > 150)
 		throw GradeTooLowException();
+
+	std::cout << *this << '\n';
 }
 
 //	Copy Constructor

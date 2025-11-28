@@ -7,6 +7,15 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
+void	DerivedClassConstruction();
+void	DerivedClassConstructionWithTarget();
+
+int main()
+{
+	DerivedClassConstruction();
+	DerivedClassConstructionWithTarget();
+	return (0);
+}
 
 void	DerivedClassConstruction()
 {
@@ -27,25 +36,21 @@ void	DerivedClassConstruction()
 
 }
 
-
 void	DerivedClassConstructionWithTarget()
 {
-	std::cout << YELLOW << "\nTest 1: Constructing basic derived classes" << RESET << '\n' << '\n';
+	std::cout << YELLOW << "\nTest 2: Constructing basic derived classes" << RESET << '\n' << '\n';
 
-	Bureaucrat Bob("Bob", 100);
-	ShrubberyCreationForm Shrubtest;
-	Bob.executeForm(Shrubtest);
+	Bureaucrat Bob("Bob", 136);
+	std::cout << '\n';
+	ShrubberyCreationForm	ShrubForm("Home");
 
-	
-	Bob.executeForm(Shrubtest)
+	Bob.executeForm(ShrubForm); 	// none of these shoukd work as the form is not signed
 
+	Bob.signForm(ShrubForm);
+	Bob.executeForm(ShrubForm);
+
+	Bob.decrementBureaucratGrade();
+	Bob.executeForm(ShrubForm);
 }
 
 
-
-int main()
-{
-	DerivedClassConstruction();
-	DerivedClassConstructionWithTarget();
-	return (0);
-}
