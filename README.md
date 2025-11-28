@@ -195,6 +195,8 @@ The three deirved forms:
     - required formExecutingGrade: 137
     - **Action:** Creates a file <target>_shrubbery int he working directory with an ascii tree inside it.
 
+    For this, we use the <fstream> class (Create an writes to a file)
+
 - RobotomyRequestForm:
     - required formSigningGrade: 72
     - required formExecutingGrade: 45
@@ -207,7 +209,7 @@ The three deirved forms:
 
 All of them take only *only one parameter* in their constructor: the target of the form. For example "home" if you want to plant shrubberry at home. 
 
-`execute(Bureaucrat const & executor) const` member function needs to be added to the base AForm class AND implement *a function* to execute the form's **action** in the concrete classes.
+`execute(Bureaucrat const & executor) const` member function needs to be added to the base AForm class AND implement *a function* to execute the form's **action** in the concrete classes. (This is the function which will be in = 0 as in the instructions, it says that it must be implemented in the concrete classes)
 
 Checks in order to execute(Bureaucrat const & executor)
 - is the form signed? -> yes / no

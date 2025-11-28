@@ -30,45 +30,18 @@ void	DerivedClassConstruction()
 
 void	DerivedClassConstructionWithTarget()
 {
-	std::cout << YELLOW << "\nTest 2: Constructing forms with target" << RESET << '\n' << '\n';
+	std::cout << YELLOW << "\nTest 1: Constructing basic derived classes" << RESET << '\n' << '\n';
 
-	std::string target;
+	Bureaucrat Bob("Bob", 100);
+	ShrubberyCreationForm Shrubtest;
+	Bob.executeForm(Shrubtest);
 
-	target = "Home";
-	ShrubberyCreationForm Shrubtest(target);
-	std::cout << YELLOW << Shrubtest << RESET << std::endl;
-	Shrubtest.executeFormAction();
+	
+	Bob.executeForm(Shrubtest)
 
-	std::cout << '\n';
-
-	target = "Villa";
-	RobotomyRequestForm Robottest(target);
-	std::cout << GREEN << Robottest << RESET << std::endl;
-	Robottest.executeFormAction();
-	Robottest.executeFormAction();
-	Robottest.executeFormAction();
-	Robottest.executeFormAction();
-	Robottest.executeFormAction();
-
-	Robottest.executeFormAction();
-
-	Robottest.executeFormAction();
-
-	Robottest.executeFormAction();
-
-	Robottest.executeFormAction();
-
-	Robottest.executeFormAction();
-
-	Robottest.executeFormAction();
-
-	std::cout << '\n';
-
-	target = "Chalet";
-	PresidentialPardonForm Presidentialtest(target);
-	std::cout << BLUE << Presidentialtest << RESET << std::endl;
-	Presidentialtest.executeFormAction();
 }
+
+
 
 int main()
 {

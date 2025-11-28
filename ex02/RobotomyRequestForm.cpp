@@ -26,11 +26,13 @@ RobotomyRequestForm& RobotomyRequestForm::operator =(const RobotomyRequestForm& 
 // Destructpor
 RobotomyRequestForm::~RobotomyRequestForm() {}
 
-void	RobotomyRequestForm::executeFormAction(void)
+void	RobotomyRequestForm::executeFormAction(void) const
 {
-	int random_number = 1 + ( std::rand() % ( 4 - 0 + 1 ) );
+	std::srand(std::time(0));
+
+    const int random_value = 1 + (std::rand() % ( 4 - 0 + 1 ));
 	std::cout << "Drilllllllliiiing noiiiiiiseeeeee" << '\n';
-	if (random_number <= 2)
+	if (random_value <= 2)
 	{
 		std::cout << getTarget() << " has been robotomized succesfully!" << '\n' << '\n';
 	}

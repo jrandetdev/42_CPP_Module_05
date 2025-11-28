@@ -6,7 +6,6 @@
 #include <fstream>
 #include "AForm.hpp"
 
-
 class	ShrubberyCreationForm : public AForm
 {
 	public:
@@ -15,7 +14,7 @@ class	ShrubberyCreationForm : public AForm
 		ShrubberyCreationForm(const ShrubberyCreationForm& other);
 		ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
 		~ShrubberyCreationForm();
-		void		executeFormAction(void);
+		void		executeFormAction(void) const;
 		//void		beSigned(const Bureaucrat& bureaucrat);
 };
 

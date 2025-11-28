@@ -36,7 +36,7 @@ AForm::AForm (const std::string name, const int formSigningGrade, const int form
 //	Copy Constructor
 AForm::AForm(const AForm& other)
 	: _name(other._name), _isSigned(other._isSigned), _SigningGrade(other._SigningGrade),
-	_ExecutingGrade(other._ExecutingGrade) {}
+	_ExecutingGrade(other._ExecutingGrade), _target(other._target) {}
 
 // Copy Assignment Constructor (only _isSigned can be changed)
 AForm& AForm::operator=(const AForm& other)
@@ -81,6 +81,9 @@ const char* AForm::GradeTooHighException::what() const throw() { return ("Exepti
 
 const char* AForm::GradeTooLowException::what() const throw() { return ("Exception: Grade too low!"); }
 
+const char* AForm::FormNotSignedException::what() const throw() { return ("Exeption: Form is not signed!"); }
+
+
 // =============================================================================
 // Member functions
 // =============================================================================
@@ -91,6 +94,25 @@ void	AForm::beSigned(const Bureaucrat& bureaucrat)
 	if (bureaucrat.getGrade() > _SigningGrade)
 		throw AForm::GradeTooLowException();
 	_isSigned = true;
+}
+
+void	AForm::execute(Bureaucrat const & executor) const
+{
+	if (this->_isSigned)
+	{
+		if (executor.getGrade() > _SigningGrade)
+		{
+			this->executeFormAction();
+		}
+		else
+		{
+			throw AForm::FormNotSignedException();
+		}
+	}
+	else
+	{
+		throw Bureaucrat::GradeTooLowException();
+	}
 }
 
 // =============================================================================
