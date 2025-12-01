@@ -8,25 +8,29 @@
 #include "PresidentialPardonForm.hpp"
 #include "Intern.hpp"
 
-void	InvalidFormTest();
+void	ValidTest();
 
 int main()
 {
-	InvalidFormTest();
+	ValidTest();
 	return (0);
 }
 
-void	InvalidFormTest()
+void	ValidTest()
 {
+	std::cout << YELLOW << "\nTest 1: Intern creates three forms and executes them" << RESET << '\n' << '\n';
+	
+	Bureaucrat Alice("Alice", 1);
+	Bureaucrat SomeRandomInternsBoss("Intern Manager", 44);
 	Intern	SomeRandomIntern;
-	AForm* rrf;
+	AForm* 	rrf;
 	
 	rrf = SomeRandomIntern.makeForm("robotomy request", "Home");
-	std::cout << "robotomy request" << rrf << '\n';
+	Alice.signForm(*rrf);
+	SomeRandomInternsBoss.executeForm(*rrf);
 	delete rrf;
-	rrf = SomeRandomIntern.makeForm("ribdenwk", "Home");
-	std::cout << "wrong ptr " << rrf << '\n';
-
-	delete rrf;
+	AForm*	scf;
+	scf = SomeRandomIntern.makeForm("shrubbery creation", "Villa");
+	delete scf;
 }
 
