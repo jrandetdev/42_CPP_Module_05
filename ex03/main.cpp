@@ -20,17 +20,19 @@ void	ValidTest()
 {
 	std::cout << YELLOW << "\nTest 1: Intern creates three forms and executes them" << RESET << '\n' << '\n';
 	
-	Bureaucrat Alice("Alice", 1);
-	Bureaucrat SomeRandomInternsBoss("Intern Manager", 44);
-	Intern	SomeRandomIntern;
-	AForm* 	rrf;
-	
-	rrf = SomeRandomIntern.makeForm("robotomy request", "Home");
-	Alice.signForm(*rrf);
-	SomeRandomInternsBoss.executeForm(*rrf);
-	delete rrf;
-	AForm*	scf;
-	scf = SomeRandomIntern.makeForm("shrubbery creation", "Villa");
-	delete scf;
+	AForm *form = Intern().makeForm("robotomy request", "home");
+	try
+	{
+		Bureaucrat Alice("Alice", 1);
+		Bureaucrat SomeRandomInternsBoss("Intern Manager", 44);
+		Alice.signForm(*form);
+		SomeRandomInternsBoss.executeForm(*form);
+		delete form;
+	}
+	catch(const std::exception& e)
+	{
+		delete form;
+		std::cerr << e.what() << '\n';
+	}
 }
 
