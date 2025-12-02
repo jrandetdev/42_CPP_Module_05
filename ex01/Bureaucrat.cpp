@@ -101,6 +101,7 @@ void	Bureaucrat::signForm(Form& form)
 // Stream Operators
 // =============================================================================
 
+// Getters are used in this context
 std::ostream& operator<<(std::ostream& outstream, const Bureaucrat& bureaucrat)
 {
 	outstream << '\n' << bureaucrat.getName() << ", bureaucrat grade "

@@ -3,87 +3,143 @@
 #include <stdio.h>
 #include "Bureaucrat.hpp"
 
-static void	constructorOfRangeGradesTest()
+static void printTestHeader(const std::string& testName, int testNum)
 {
-	std::cout << YELLOW << "Test 1: constructing with out of range grade (should not construct)" << RESET << std::endl;
-	try
-	{
-		Bureaucrat test("Bob", 160);
-		std::cout << GREEN << test << RESET << std::endl;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-		std::cout << "Exiting with exception" << '\n';
-	}
+    std::cout << "\n" << BOLD << CYAN << "═══════════════════════════════════════" << RESET << std::endl;
+    std::cout << BOLD << YELLOW << "TEST " << testNum << ": " << testName << RESET << std::endl;
+    std::cout << BOLD << CYAN << "═══════════════════════════════════════" << RESET << std::endl;
+}
 
-	try
-	{
-		Bureaucrat test2("Alice", 0);
-	}
-	catch(const std::exception& e)
-	{	
-		std::cerr << e.what() << '\n';
-		std::cout << "Exiting with exception" << '\n';
-	}
+static void printSuccess(const std::string& message = "Test passed")
+{
+    std::cout << GREEN << "✓ " << message << RESET << std::endl;
+}
+
+static void printFailure(const std::string& message = "Test failed")
+{
+    std::cout << RED << "✗ " << message << RESET << std::endl;
+}
+
+static void printAction(const std::string& action)
+{
+    std::cout << BLUE << "→ " << action << RESET << std::endl;
+}
+
+static void constructorOfRangeGradesTest()
+{
+    printTestHeader("Constructor with Out-of-Range Grades", 1);
+    
+    // Test grade too low (> 150)
+    printAction("Attempting to create bureaucrat with grade 160 (too low)...");
+    try
+    {
+        Bureaucrat test("Bob", 160);
+        std::cout << test << std::endl;
+        printFailure("Should have thrown exception!");
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << MAGENTA << "Exception caught: " << e.what() << RESET << std::endl;
+        printSuccess();
+    }
+    
+    std::cout << std::endl;
+    
+    // Test grade too high (< 1)
+    printAction("Attempting to create bureaucrat with grade 0 (too high)...");
+    try
+    {
+        Bureaucrat test2("Alice", 0);
+        std::cout << test2 << std::endl;
+        printFailure("Should have thrown exception!");
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << MAGENTA << "Exception caught: " << e.what() << RESET << std::endl;
+        printSuccess();
+    }
 }
 
 static void incrementOutofRangeTest()
 {
-	std::cout << YELLOW << "\nTest 2: incrementing a grade and making it out of range" << RESET << std::endl;
-	try
-	{
-		Bureaucrat test("Bob", 1);
-		std::cout << GREEN << test << RESET << std::endl;
-		test.incrementBureaucratGrade();
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-		std::cout << "Exiting with exception" << '\n';
-	}
+    printTestHeader("Increment Grade Out of Range", 2);
+    
+    try
+    {
+        printAction("Creating Bob with grade 1 (highest possible)...");
+        Bureaucrat test("Bob", 1);
+        std::cout << test << std::endl;
+        
+        printAction("Attempting to increment grade beyond 1...");
+        test.incrementBureaucratGrade();
+        printFailure("Should have thrown exception!");
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << MAGENTA << "Exception caught: " << e.what() << RESET << std::endl;
+        printSuccess();
+    }
 }
 
 static void decrementOutofRangeTest()
 {
-	std::cout << YELLOW << "\nTest 3: decrementing a grade and making it out of range" << RESET << std::endl;
-	try
-	{
-		Bureaucrat test("Bob", 1);
-		std::cout << GREEN << test << RESET << std::endl;					// Generates the function call operator<<(cout, test)
-		test.incrementBureaucratGrade();
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-		std::cout << "Exiting with exception" << '\n';
-	}
+    printTestHeader("Decrement Grade Within Range", 3);
+    
+    try
+    {
+        printAction("Creating Bob with grade 1...");
+        Bureaucrat test("Bob", 1);
+        std::cout << test << std::endl;
+        
+        printAction("Decrementing grade to 2 (valid operation)...");
+        test.decrementBureaucratGrade();
+        std::cout << test << std::endl;
+        printSuccess();
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << MAGENTA << "Exception caught: " << e.what() << RESET << std::endl;
+        printFailure("Should not have thrown exception!");
+    }
 }
 
-static	void	correctValuesTest()
+static void correctValuesTest()
 {
-	std::cout << YELLOW << "\nTest 4: testing with correct values" << RESET << std::endl;
-	try
-	{
-		Bureaucrat test("Charlie", 50);
-		std::cout << GREEN << test << RESET << std::endl;
-		test.incrementBureaucratGrade();
-		std::cout << GREEN << test << RESET << std::endl;
-		test.decrementBureaucratGrade();
-		std::cout << GREEN << test << RESET << std::endl;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
+    printTestHeader("Operations with Valid Grades", 4);
+    
+    try
+    {
+        printAction("Creating Charlie with grade 50...");
+        Bureaucrat test("Charlie", 50);
+        std::cout << test << std::endl;
+        
+        printAction("Incrementing grade (50 → 49)...");
+        test.incrementBureaucratGrade();
+        std::cout << test << std::endl;
+        
+        printAction("Decrementing grade (49 → 50)...");
+        test.decrementBureaucratGrade();
+        std::cout << test << std::endl;
+        
+        printSuccess("All operations completed successfully");
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << MAGENTA << "Exception caught: " << e.what() << RESET << std::endl;
+        printFailure();
+    }
 }
 
 int main()
 {
-	constructorOfRangeGradesTest();
-	incrementOutofRangeTest();
-	decrementOutofRangeTest();
-	correctValuesTest();
-	
-	return (0);
+    std::cout << BOLD << CYAN << "BUREAUCRAT CLASS TEST" << RESET << std::endl;
+    
+    constructorOfRangeGradesTest();
+    incrementOutofRangeTest();
+    decrementOutofRangeTest();
+    correctValuesTest();
+    
+    std::cout << std::endl;
+    
+    return 0;
 }

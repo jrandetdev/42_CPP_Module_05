@@ -213,18 +213,70 @@ All of them take only *only one parameter* in their constructor: the target of t
 
 Checks in order to execute(Bureaucrat const & executor)
 - is the form signed? -> yes / no
-- is the grade of the bureaucrat attempting to execute it high enough? -> yes / no
+- is the grade of the bureaucrat attempting to execute it high enough? -> yes / no (low since were inverted)
 
 Otherwise, throw approriate exception. (another exception to write)
-
-These checks can me made in two manners:
-- in each concrete class
-- in the base class
-AND then call a function to execute them. One way is more elegant than the other (base class)
 
 `executeForm(AForm const & form) const` member function needs to be added to Bureaucrat class. It must attempt to execute the form. If successful:
 
 ```cpp
 std::cout << <bureaucrat> executed <form> << std::endl
 ```
+
+## Implementation
+
+```cpp
+class	AForm
+{
+	public:
+		// Constructors and destructors
+		AForm();
+		AForm (const std::string name, const int formSigningGrade, const int formExcecutingGrade, const std::string &target);
+		AForm(const AForm& other);
+		AForm& operator=(const AForm& other);
+		virtual ~AForm();
+
+		const std::string&	getFormName() const;                                                                                                                                                                                                                          
+		bool				getFormSignatureStatus() const;
+		int					getSigningGrade() const;
+		int					getExecutingGrade() const;
+		const std::string&	getTarget() const;
+
+		virtual void		beSigned(const Bureaucrat& bureaucrat);
+		virtual void 		execute(Bureaucrat const & executor) const; // calls the executeFormAction
+		
+		class GradeTooHighException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
+
+		class GradeTooLowException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
+
+		class FormNotSignedException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
+
+	protected:
+		virtual void		executeFormAction(void) const = 0;
+	private:
+		const std::string	_name;
+		bool				_isSigned;
+		const int			_SigningGrade;
+		const int 			_ExecutingGrade;
+		const std::string	_target;
+};
+```
+
+**What changed compared to the Form class in the previous exercise:**
+
+- Abstract classes must contain a pure virtual function, and in the subject it mentions that its `executeFormAction` which has to be implemented in the conrete classes, insinuating that 
+- The destructor is virtual, so that it calls the most derived version of the AForm class
+
 
