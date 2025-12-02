@@ -100,9 +100,6 @@ void	AForm::execute(Bureaucrat const & executor) const
 {
 	if (this->_isSigned)
 	{
-		std::cout << "Form is signed, checking the Bureaucrat's executing grade..." << '\n';
-		std::cout << executor.getGrade() << '\n';
-		std::cout << _ExecutingGrade << '\n';
 		if (executor.getGrade() <= _ExecutingGrade)
 		{
 			this->executeFormAction();

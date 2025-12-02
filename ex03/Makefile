@@ -23,6 +23,7 @@ clean:
 	@rm -rf $(DIR_BUILD)
 
 fclean: clean
+	@rm -rf ./Home_shrubbery
 	@rm -rf $(NAME)
 
 re: fclean all

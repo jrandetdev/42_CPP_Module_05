@@ -90,12 +90,12 @@ void	Bureaucrat::signForm(AForm& form)
 	try
 	{
 		form.beSigned(*this);
-		std::cout << GREEN << '\n' << this->_name << " signed " << form.getFormName() << RESET << std::endl;		
+		std::cout << GREEN << this->_name << " signed " << form.getFormName() << RESET << std::endl;		
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
-		std::cout << RED << '\n' << this->_name << " couldn't sign " << form.getFormName() << " because " << e.what() << RESET << std::endl;
+		std::cerr << MAGENTA << "Exception caught: " << e.what() << RESET << std::endl;
+		std::cout << RED << this->_name << " couldn't sign " << form.getFormName() << " because " << e.what() << RESET << std::endl;
 	}	
 }
 
@@ -103,6 +103,7 @@ void	Bureaucrat::signForm(AForm& form)
 // Signing form member function
 // =============================================================================
 
+// Matching catch block for the exception thrown by executeForm, the program will continue
 void	Bureaucrat::executeForm(AForm const& form)
 {
 	try
@@ -112,7 +113,7 @@ void	Bureaucrat::executeForm(AForm const& form)
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+        std::cerr << MAGENTA << "Exception caught: " << e.what() << RESET << std::endl;
 	}
 }
 
@@ -122,7 +123,7 @@ void	Bureaucrat::executeForm(AForm const& form)
 
 std::ostream& operator<<(std::ostream& outstream, const Bureaucrat& bureaucrat)
 {
-	outstream << '\n' << bureaucrat.getName() << ", bureaucrat grade "
+	outstream << bureaucrat.getName() << ", bureaucrat grade "
 			<< bureaucrat.getGrade() << ".";
 	return (outstream);
 }

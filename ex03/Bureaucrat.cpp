@@ -95,7 +95,7 @@ void	Bureaucrat::signForm(AForm& form)
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
-		std::cout << RED << '\n' << this->_name << " couldn't sign " << form.getFormName() << " because " << e.what() << RESET << std::endl;
+		std::cout << RED << this->_name << " couldn't sign " << form.getFormName() << " because " << e.what() << RESET << std::endl;
 	}	
 }
 
@@ -122,7 +122,7 @@ void	Bureaucrat::executeForm(AForm const& form)
 
 std::ostream& operator<<(std::ostream& outstream, const Bureaucrat& bureaucrat)
 {
-	outstream << '\n' << bureaucrat.getName() << ", bureaucrat grade "
+	outstream << bureaucrat.getName() << ", bureaucrat grade "
 			<< bureaucrat.getGrade() << ".";
 	return (outstream);
 }
