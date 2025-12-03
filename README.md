@@ -127,12 +127,13 @@ class Bureaucrat
 		
         void incrementBureaucratGrade();
 		void decrementBureaucratGrade();
-        
+
 		void	signForm(Form& form);
 	private:
 		const std::string   _name;
 		int                 _grade;
 };
+```
 
 ### Key Learning
 - **Custom exceptions:** Inherit from `std::exception` class
