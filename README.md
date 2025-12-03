@@ -102,6 +102,38 @@ Invalid grades must throw its own custom exceptions:
 - `Bureaucrat::GradeTooHighException` (grade < 1)
 - `Bureaucrat::GradeTooLowException` (grade > 150)
 
+```cpp
+class Bureaucrat
+{
+	public:
+		// Constructors and destructor
+		Bureaucrat();
+		Bureaucrat(const std::string name, int grade);
+		Bureaucrat(const Bureaucrat& other);
+		Bureaucrat& operator=(const Bureaucrat& other);
+		~Bureaucrat();
+
+		class GradeTooHighException : public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
+		class GradeTooLowException : public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
+		
+        const std::string&  getName() const;
+		int                 getGrade() const;
+		
+        void incrementBureaucratGrade();
+		void decrementBureaucratGrade();
+        
+		void	signForm(Form& form);
+	private:
+		const std::string   _name;
+		int                 _grade;
+};
+
 ### Key Learning
 - **Custom exceptions:** Inherit from `std::exception` class
 - **Overloaded insertion operator (`<<`):** Defined as a non-member function because:
